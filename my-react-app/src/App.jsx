@@ -12,6 +12,7 @@ import HeroPage from "./pages/HeroPage/HeroPage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import CoachRegister from "./pages/Register/CoachRegister";
 import PlayerRegister from "./pages/Register/PlayerRegister";
+import AboutPage from "./pages/AboutPage/AboutPage";
 
 function RootLayout() {
     return (
@@ -34,6 +35,7 @@ const router = createBrowserRouter(
         <>
             <Route path="/" element={<RootLayout />}>
                 <Route index element={<HeroPage />} />
+                <Route path="about" element={<AboutPage />} />
                 <Route path="login" element={<LoginPage />} />
                 <Route path="coachregister" element={<CoachRegister />} />
                 <Route path="playerregister" element={<PlayerRegister />} />

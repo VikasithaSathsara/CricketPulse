@@ -59,11 +59,8 @@ function LoginPage() {
                                 Don't have an Account? <br />
                                 <br />{" "}
                                 <a href="#">
-                                    <Link
-                                        className="btn btn-success"
-                                        to={"/signup"}
-                                    >
-                                        Sign up
+                                    <Link className="btn btn-success" to={"/"}>
+                                        Register
                                     </Link>
                                 </a>
                             </p>

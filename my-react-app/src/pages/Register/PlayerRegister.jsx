@@ -4,6 +4,8 @@ import "./Register.scss";
 import { useNavigate } from "react-router-dom";
 
 function PlayerRegister() {
+    const navigate = useNavigate();
+
     return (
         <div>
             <Navbar />
@@ -106,7 +108,7 @@ function PlayerRegister() {
                             className="cancel"
                             onClick={() => navigate("/")}
                         >
-                            Cencel
+                            Cancel
                         </button>
                     </form>
                 </div>

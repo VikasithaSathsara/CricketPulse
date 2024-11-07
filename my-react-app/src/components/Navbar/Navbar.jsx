@@ -20,7 +20,7 @@ function Navbar() {
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/signup" className="nav-link">
+                        <NavLink to="/about" className="nav-link">
                             About
                         </NavLink>
                     </li>
