@@ -26,7 +26,7 @@ function AboutPage() {
                     </div>
                     <div className="about-section">
                         <p>
-                            Cricket Pluse is more than just a platform; it’s a
+                            Cricket Pluse is more than just a platform, it’s a
                             community built around the love of cricket. Founded
                             by cricket enthusiasts, we aim to connect players,
                             coaches, and fans, creating a network that shares in

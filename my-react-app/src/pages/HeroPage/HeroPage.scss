@@ -27,12 +27,22 @@
             align-items: center;
 
             h1 {
-                margin-bottom: 30px;
+                margin-bottom: 10px;
                 color: colors.$primary-color;
                 white-space: nowrap;
                 font-size: 7.5vw;
                 z-index: 11;
             }
+        }
+
+        .hero-tagline{
+                margin-bottom: 30px;
+                color: colors.$primary-color;
+                white-space: nowrap;
+                font-size: 1.8vw;
+                text-align: center;
+                z-index: 11;
+                font-style: italic;
         }
 
         .hero-button-section {

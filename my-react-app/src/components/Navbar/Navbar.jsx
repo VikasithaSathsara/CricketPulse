@@ -1,17 +1,17 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./Navbar.scss";
-// import ico from "../../assets/ico.jpg";
+import icon from "../../assets/icon.png";
 
 function Navbar() {
     return (
         <nav class="navbar">
             <div class="nav">
-                {/* <div class="logo">
+                <div class="logo">
                     <a href="/">
-                        <img src={ico} alt="" />
+                        <img src={icon} alt="" />
                     </a>
-                </div> */}
+                </div>
 
                 <ul class="menu">
                     <li>
