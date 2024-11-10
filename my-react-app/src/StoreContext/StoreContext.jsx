@@ -22,6 +22,10 @@ const StoreContextProvider = (props) => {
   );
   const [role, setRole] = useState(() => localStorage.getItem("role") || "");
 
+  const [profileImage, setProfileImage] = useState(
+    () => localStorage.getItem("profileImage") || ""
+  );
+
   const [selectedConsultant, setSelectedConsultant] = useState(null);
   const updateSelectedConsultant = (consultant) => {
     setSelectedConsultant(consultant);
@@ -40,6 +44,7 @@ const StoreContextProvider = (props) => {
     setFirstName("");
     setLastName("");
     setRole("");
+    setProfileImage("");
     localStorage.clear();
     navigate("/");
   };
@@ -47,16 +52,18 @@ const StoreContextProvider = (props) => {
   const contextValue = {
     isLoggedIn,
     username,
-    setIsLoggedIn,
+    profileImage,
+    selectedConsultant,
     firstName,
     lastName,
     role,
+    setIsLoggedIn,
     setUsername,
     setFirstName,
     setLastName,
     setRole,
     handleLogout,
-    selectedConsultant,
+    setProfileImage,
     updateSelectedConsultant,
   };
 

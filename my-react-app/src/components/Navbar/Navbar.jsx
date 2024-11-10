@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import {  Link,NavLink } from "react-router-dom";
 import "./Navbar.scss";
 import icon from "../../assets/icon.png";
 
@@ -15,19 +15,19 @@ function Navbar() {
 
                 <ul class="menu">
                     <li>
-                        <NavLink to="/" activeClassName="active-page">
+                        <Link to="/" >
                             Home
-                        </NavLink>
+                        </Link>
                     </li>
                     <li>
-                        <NavLink to="/about" className="nav-link">
+                        <Link to="/about" className="nav-link">
                             About
-                        </NavLink>
+                        </Link>
                     </li>
                     <li>
-                        <NavLink to="/login" className="nav-link">
+                        <Link to="/login" className="nav-link">
                             Login
-                        </NavLink>
+                        </Link>
                     </li>
                 </ul>
             </div>

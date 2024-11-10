@@ -28,7 +28,7 @@
             align-items: center;
 
             h1 {
-                color: colors.$primary-color;
+                color: colors.$primary-font-color;
                 white-space: nowrap;
                 font-size: 5.5vw;
                 z-index: 11;
@@ -43,7 +43,7 @@
             padding: 30px;
 
             p{
-                color: colors.$primary-color;
+                color: colors.$primary-font-color;
                 font-size: 1.5vw;
                 text-align: center;
             }

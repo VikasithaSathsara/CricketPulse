@@ -34,7 +34,7 @@
 }
 
 .menu a {
-    color: colors.$primary-color;
+    color: colors.$primary-font-color;
     text-decoration: none;
     transition: color 0.3s ease;
     font-size: 20px;
@@ -45,13 +45,13 @@
 .menu li a:hover {
     color: colors.$secondary-color;
     border-radius: 40px;
-    background-color: colors.$primary-color;
+    background-color: colors.$primary-font-color;
 }
 
 .menu li a.active {
     color: colors.$secondary-color;
     border-radius: 40px;
-    background-color: colors.$primary-color;
+    background-color: colors.$primary-font-color;
 }
 
 @media screen and (max-width: 768px) {
@@ -80,12 +80,16 @@
     }
 
     .menu a {
-        color: colors.$primary-color;
+        color: colors.$primary-font-color;
         text-decoration: none;
         transition: color 0.3s ease;
         font-size: 23px;
         font-weight: 600;
-    }
+        -webkit-transition: color 0.3s ease;
+        -moz-transition: color 0.3s ease;
+        -ms-transition: color 0.3s ease;
+        -o-transition: color 0.3s ease;
+}
 
     //   .menu li a:hover,
     //   .menu li a.active {
