@@ -190,15 +190,21 @@ const SideBar = () => {
                     </li>
 
                     <li className="side-item">
-                      <Link to="/">
-                        <MdOutlinePendingActions />
-                        <span> Approvals </span>
+                      <Link to="/sessions">
+                      <PiCricketFill size={20} />
+                        <span> Sessions</span>
                       </Link>
                     </li>
                     <li className="side-item">
-                      <Link to="/add-couach">
-                        <FaUserMd />
-                        <span> Add Counselor </span>
+                      <Link to="/admin-court-booking">
+                      <FaAddressBook />
+                      <span>Bookigs</span>
+                      </Link>
+                    </li>
+                    <li className="side-item">
+                      <Link to="/users">
+                      <FaUsers />
+                      <span>Users</span>
                       </Link>
                     </li>
                   </>

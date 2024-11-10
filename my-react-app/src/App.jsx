@@ -14,8 +14,13 @@ import SideBar from "./components/SideBar/SideBar";
 import AboutPage from "./pages/AboutPage/AboutPage";
 import MemberDashboard from "./pages/DashBoard/MemberDashBoard/MemberDashboard";
 import MemberSession from "./pages/Sessions/MemberSessions/MemberSession";
+import CoachSession from "./pages/Sessions/CoachSessions/CoachSession";
+import AdminSession from "./pages/Sessions/AdminSessions/AdminSession";
 import MemberProfile from "./pages/Profile/MemberProfile/MemberProfile";
-import CourtBooking from "./pages/CourtBooking/CourtBooking";
+import CourtBooking from "./pages/CourtBooking/MemberCourtBooking/CourtBooking";
+import AdminCourtBooking from "./pages/CourtBooking/AdminCourtBooking/AdminCourtBooking";   
+import CoachProfile from "./pages/Profile/CoachProfile/CoachProfile"
+import UserPage from "./pages/UserPage/UserPage";
 
 function App() {
   const { isLoggedIn, role } = useContext(StoreContext);
@@ -44,6 +49,9 @@ function App() {
             <Routes>
               <Route path="/" element={<AdminDashBoard />} />
               <Route path="/dashboard" element={<AdminDashBoard />} />
+              <Route path="/admin-court-booking" element={<AdminCourtBooking/>} />
+              <Route path="/sessions" element={<AdminSession/>} />
+              <Route path="/users" element={<UserPage/>} />
             </Routes>
             {/* <Footer /> */}
           </>
@@ -55,6 +63,8 @@ function App() {
             <Routes>
               <Route path="/" element={<CoachDashboard />} />
               <Route path="/dashboard" element={<CoachDashboard />} />
+              <Route path="/sessions" element={<CoachSession/>} />
+              <Route path="/profile" element={<CoachProfile/>} />
             </Routes>
             {/* <Footer /> */}
           </>
