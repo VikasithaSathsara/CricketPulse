@@ -28,7 +28,7 @@
 
             h1 {
                 margin-bottom: 30px;
-                color: colors.$primary-color;
+                color: colors.$primary-font-color;
                 white-space: nowrap;
                 font-size: 7.5vw;
                 z-index: 11;
@@ -46,15 +46,15 @@
                 margin-left: 35px;
                 font-size: 1.5rem;
                 background-color: #00000000;
-                color: colors.$primary-color;
+                color: colors.$primary-font-color;
                 border-radius: 10px;
-                border: solid 2px colors.$primary-color;
+                border: solid 2px colors.$primary-font-color;
                 cursor: pointer;
                 transition: background-color 0.3s;
             }
 
             .hero-button:hover {
-                background-color: colors.$primary-color;
+                background-color: colors.$primary-font-color;
                 color: colors.$secondary-color;
             }
         }
