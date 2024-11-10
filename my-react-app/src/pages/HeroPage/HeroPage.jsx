@@ -25,6 +25,9 @@ const HeroPage = () => {
                     <div className="hero-heading">
                         <h1>Cricket Pulse</h1>
                     </div>
+                    <div className="hero-tagline">
+                        <h3>Bringing the Game Closer to You...</h3>
+                    </div>
                     <div className="hero-button-section">
                         <button
                             className="hero-button"

@@ -21,7 +21,7 @@
   margin-top: 5px;
   margin-right:30px;
   justify-content: center;
-  padding: 5px;
+  padding: 8px;
   margin-left: 10px;
   list-style: none;
   height: 40px;
@@ -31,6 +31,12 @@
   &:hover {
     background-color: sysColors.$primary-color-hover;
   }
+  a {
+    text-decoration: none;
+    color: #f5f5f5;
+    font-size: 18px;
+
+  }
 }
 
 .nav-item-new-apointment {
@@ -38,7 +44,7 @@
   align-items: center;
   padding: 6px 6px;
   margin-right: 20px;
-  margin-top: 8px;
+  margin-top: 5px;
   list-style: none;
   height: 40px;
   width: fit-content;
@@ -50,19 +56,17 @@
 
   &:hover {
     background-color: sysColors.$primary-color-hover;
+    cursor: pointer;
   }
 }
 
 .nav-item-new-apointment span {
   margin-left: 8px;
-  font-weight: 500;
+  font-weight: Bold;
+  font-family:Inter
 }
 
-.nav-item a {
-  text-decoration: none;
-  color: #f5f5f5;
-  font-size: 18px;
-}
+
 
 .side-item a {
   display: flex;
@@ -72,10 +76,19 @@
   list-style: none;
   height: 50px;
   text-decoration: none;
-  color: #f5f5f5;
+  color: sysColors.$primary-font-color;
+  font-weight:400 !important;
 
-  :hover {
+
+  &:hover {
     background: sysColors.$primary-color-hover;
+    display: flex;
+    align-items: center;
+    width: 160px;
+    list-style: none;
+    height: 50px;
+    //border: 1px solid #f5f5f583;
+    border-radius: 8px;
   }
 
 }
@@ -83,6 +96,7 @@
 
 .menu-bars {
   margin-left: 2rem;
+  margin-top:0.5rem;
   font-size: 2rem;
   background: none;
   padding-bottom: 5px;
@@ -91,7 +105,7 @@
 
 .nav-menu {
   background: sysColors.$primary-color;
-  width: 170px;
+  width: 175px;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -99,6 +113,7 @@
   top: 0;
   left: -100%;
   transition: 0.4s;
+  padding-left: 35px;
 }
 
 .nav-menu.active {
@@ -106,25 +121,11 @@
   transition: 0.4s;
 }
 
-.nav-item a:hover {
-  background: sysColors.$primary-color-hover;
-  font-weight: bold;
-}
 
-.side-item a:hover {
-  background: sysColors.$primary-color-hover;
-  display: flex;
-  align-items: center;
-  padding: 6px 6px;
-  width: 160px;
-  list-style: none;
-  height: 50px;
-  border: 1px solid #f5f5f583;
-  border-radius: 10px;
 
-}
+
 .nav-menu-items {
-  margin-right: 56px;
+  margin-right: 60px;
   width: 100%;
 }
 .navbar-toggle {
@@ -134,7 +135,6 @@
   display: flex;
   justify-content: start;
   align-items: center;
-  margin-bottom: 5px;
 }
 span {
   margin-left: 16px;

@@ -1,40 +1,19 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, Profiler } from 'react';
 import "./LoginPage.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import { StoreContext } from '../../StoreContext/StoreContext';
+import testUsers from '../../assets/tempData/testUsers';
+
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  const { setIsLoggedIn, setFirstName, setRole, setUsername, setLastName } =
+  const { setIsLoggedIn, setFirstName, setRole, setUsername, setLastName , setProfileImage } =
     useContext(StoreContext);
 
-  const testUsers = [
-    {
-      username: "member@gmail.com",
-      password: "member@123",
-      role: "MEMBER",
-      firstName: "MemberFName",
-      lastName: "MemberLName",
-    },
-    {
-      username: "coach@gmail.com",
-      password: "coach@123",
-      role: "COACH",
-      firstName: "CoachFName",
-      lastName: "CoachLName",
-    },
-    {
-      username: "admin@gmail.com",
-      password: "admin@123",
-      role: "ADMIN",
-      firstName: "AdminFName",
-      lastName: "AdminLName",
-    },
-  ];
-
+ 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -72,6 +51,7 @@ function LoginPage() {
       setUsername(user.username);
       setRole(user.role);
       setIsLoggedIn(true);
+      setProfileImage(user.profileImage);
       navigate("/");
     } else {
       alert("Login failed. Please check your credentials.");
@@ -137,22 +117,22 @@ function LoginPage() {
               Login
             </button>
 
-            <div className="signup">
-              <p>
-                Don't have an Account? <br />
-                <br />{" "}
-                <a href="#">
-                  <Link className="btn btn-success" to={"/signup"}>
-                    Sign up
-                  </Link>
-                </a>
-              </p>
+                        <div className="signup">
+                            <p>
+                                Don't have an Account? <br />
+                                <br />{" "}
+                                <a href="#">
+                                    <Link className="btn btn-success" to={"/"}>
+                                        Register
+                                    </Link>
+                                </a>
+                            </p>
+                        </div>
+                    </form>
+                </div>
             </div>
-          </form>
         </div>
-      </div>
-    </div>
-  );
+    );
 }
 
 export default LoginPage;

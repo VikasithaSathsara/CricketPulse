@@ -9,7 +9,12 @@ function CoachRegister() {
     return (
         <div>
             <Navbar />
-            <div className="form-background">
+            <div
+                className="form-background"
+                style={{
+                    backgroundImage: `url('https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/b5a72f50126031.58c81b1abf0a0.jpg')`,
+                }}
+            >
                 <div className="form-warp">
                     <form action="">
                         <h1 className="form-heading">Coach Registation Form</h1>
@@ -106,7 +111,7 @@ function CoachRegister() {
                             className="cancel"
                             onClick={() => navigate("/")}
                         >
-                            Cencel
+                            Cancel
                         </button>
                     </form>
                 </div>

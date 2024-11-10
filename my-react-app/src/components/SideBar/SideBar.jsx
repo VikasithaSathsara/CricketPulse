@@ -9,8 +9,11 @@ import {
   FaUser,
 } from "react-icons/fa";
 import { AiOutlineClose } from "react-icons/ai";
+import { PiCricketFill } from "react-icons/pi";
 import { IconContext } from "react-icons/lib";
+import { ImProfile } from "react-icons/im";
 import { StoreContext } from "../../StoreContext/StoreContext";
+
 import {
   MdAssignmentAdd,
   MdLogout,
@@ -19,9 +22,11 @@ import {
 import { FaUsers } from "react-icons/fa6";
 import Swal from "sweetalert2"; // Import SweetAlert2
 import "./SideBarStyles.scss";
+import UserProfileCard from "../../components/ProfileCard/ProfileCard";
+
 
 const SideBar = () => {
-  const { isLoggedIn, handleLogout, firstName, role, username } =
+  const { isLoggedIn, handleLogout, firstName,lastName ,role, username ,profileImage} =
     useContext(StoreContext);
 
   const [sidebar, setSidebar] = useState(false);
@@ -54,9 +59,19 @@ const SideBar = () => {
     }
   };
 
+  const handleUserIconClick = () => {
+    setShowProfileCard(!showProfileCard);
+  };
+
+  const handleOutsideClick = (e) => {
+    if (e.target.closest('.user-profile-card') === null) {
+      setShowProfileCard(false);
+    }
+  };
+
   return (
     <>
-      <IconContext.Provider value={{ color: "#fff" }}>
+      <IconContext.Provider value={{ color: "#fff" }} onClick={handleOutsideClick}>
         <div className="dash-board-navbar">
           <Link to="#" className="menu-bars">
             <FaBars onClick={showSidebar} />
@@ -68,15 +83,35 @@ const SideBar = () => {
                 className="nav-item-new-apointment"
               >
                 <Link to="/coaches">
-                  <MdAssignmentAdd />
+                  <MdAssignmentAdd size={20} />
                 </Link>
-                <span>New Appointment</span>
+                <span>Book A Court</span>
               </button>
             )}
 
-            <li className="nav-item">
+            {role === "MEMBER" && (
+              <button
+                onClick={() => navigate("/coaches")}
+                className="nav-item-new-apointment"
+              >
+                <Link to="/coaches">
+                  <MdAssignmentAdd size={20} />
+                </Link>
+                <span>New Coaching Session</span>
+              </button>
+            )}
+
+            <li className="nav-item"  onClick={handleUserIconClick}>
               <Link onClick={toggleProfileCard}>
-                <FaUser />
+              <FaUser />
+          {showProfileCard && (
+            <UserProfileCard
+              profile_icon={profileImage}
+              name={`${firstName} ${lastName}`}
+              role={role}
+              onClose={() => setShowProfileCard(false)}
+            />
+          )}
               </Link>
             </li>
           </div>
@@ -92,36 +127,76 @@ const SideBar = () => {
 
             {isLoggedIn && (
               <>
-                <li className="side-item">
-                  <Link to="/dashboard">
-                    <FaHome />
-                    <span> Dashboard </span>
-                  </Link>
-                </li>
-                <li className="side-item">
-                  <Link to="/appointments">
-                    <FaAddressBook />
-                    <span> Appointments </span>
-                  </Link>
-                </li>
-                {(role === "CLIENT" || role === "COUNSELOR") && (
-                  <li className="side-item">
-                    <Link to="/profile">
-                      <FaUserCircle />
-                      <span> Profile </span>
-                    </Link>
-                  </li>
+                {role === "COACH" && (
+                  <>
+                    <li className="side-item">
+                      <Link to="/dashboard">
+                        <FaHome />
+                        <span> Dashboard </span>
+                      </Link>
+                    </li>
+
+                    <li className="side-item">
+                      <Link to="/sessions">
+                        <PiCricketFill size={20} />
+                        <span>Sessions</span>
+                      </Link>
+                    </li>
+                    <li className="side-item">
+                      <Link to="/profile">
+                        <FaUserCircle />
+                        <span>Profile </span>
+                      </Link>
+                    </li>
+                  </>
+                )}
+                {role === "MEMBER" && (
+                  <>
+                    <li className="side-item">
+                      <Link to="/dashboard">
+                        <FaHome />
+                        <span> Dashboard </span>
+                      </Link>
+                    </li>
+
+                    <li className="side-item">
+                      <Link to="/court-bookings">
+                        <FaAddressBook />
+                        <span>Court Bookigs</span>
+                      </Link>
+                    </li>
+
+                    <li className="side-item">
+                      <Link to="/sessions">
+                        <PiCricketFill size={20} />
+                        <span>Sessions</span>
+                      </Link>
+                    </li>
+                    <li className="side-item">
+                      <Link to="/profile">
+                        <FaUserCircle />
+                        <span>Profile </span>
+                      </Link>
+                    </li>
+                  </>
                 )}
                 {role === "ADMIN" && (
                   <>
                     <li className="side-item">
-                      <Link to="/applications">
+                      <Link to="/dashboard">
+                        <FaHome />
+                        <span> Dashboard </span>
+                      </Link>
+                    </li>
+
+                    <li className="side-item">
+                      <Link to="/">
                         <MdOutlinePendingActions />
                         <span> Approvals </span>
                       </Link>
                     </li>
                     <li className="side-item">
-                      <Link to="/add-counselor">
+                      <Link to="/add-couach">
                         <FaUserMd />
                         <span> Add Counselor </span>
                       </Link>
