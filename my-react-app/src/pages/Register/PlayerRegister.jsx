@@ -12,9 +12,7 @@ function PlayerRegister() {
             <div className="form-background">
                 <div className="form-warp">
                     <form action="">
-                        <h1 className="form-heading">
-                            Player Registation Form
-                        </h1>
+                        <h1 className="form-heading">Player Registation</h1>
 
                         <div className="form-input-box">
                             <input

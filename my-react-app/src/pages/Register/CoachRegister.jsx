@@ -17,7 +17,7 @@ function CoachRegister() {
             >
                 <div className="form-warp">
                     <form action="">
-                        <h1 className="form-heading">Coach Registation Form</h1>
+                        <h1 className="form-heading">Coach Registation</h1>
 
                         <div className="form-input-box">
                             <input

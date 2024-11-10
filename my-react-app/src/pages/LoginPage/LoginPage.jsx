@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import "./LoginPage.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
+import { FaLock } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 
 function LoginPage() {
     return (
@@ -36,7 +38,7 @@ function LoginPage() {
                                 required
                             />
 
-                            {/* <FaUser className="icon" /> */}
+                            <FaUser className="icon" />
                         </div>
 
                         <div className="input-box">
@@ -47,7 +49,7 @@ function LoginPage() {
                                 // onChange={(e) => setPassword(e.target.value)}
                                 required
                             />
-                            {/* <FaLock className="icon" /> */}
+                            <FaLock className="icon" />
                         </div>
 
                         <button type="submit" className="login">
