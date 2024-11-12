@@ -1,4 +1,5 @@
 import { useState, useContext, Profiler } from 'react';
+import axios from 'axios'; 
 import "./LoginPage.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
@@ -17,53 +18,39 @@ function LoginPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // try {
-    //     const response = await axios.post('http://localhost:8080/api/users/authenticate', {
-    //         email: email,
-    //         password: password
-    //     });
+    try {
+        const response = await axios.post('http://localhost:8080/api/users/authenticate', {
+            email: email,
+            password: password
+        });
 
-    //     console.log("login-res",response)
+        console.log("login-res",response)
 
-    //     if (response.status === 200) {
-    //         const role = response.data.role;
-    //         const firstName = response.data.firstName;
-    //         const lastName = response.data.firstName;
-    //         const username = response.data.username;
+        if (response.status === 200 ) {
+            const role = response.data.role;
+            const firstName = response.data.firstName;
+            const lastName = response.data.lastName;
+            const username = response.data.username;
 
-    //         console.log("First Name:", firstName);
-    //         console.log("Last Name:", lastName);
-    //         console.log("Role:", role);
-    //         console.log("username",username)
+            console.log("First Name:", firstName);
+            console.log("Last Name:", lastName);
+            console.log("Role:", role);
+            console.log("username", username);
 
-    //         setFirstName(firstName);
-    //         setLastName(lastName);
-    //         setUsername(username);
-    //         setRole(role)
-
-    const user = testUsers.find(
-      (user) => user.username === email && user.password === password
-    );
-
-    if (user) {
-      setFirstName(user.firstName);
-      setLastName(user.lastName);
-      setUsername(user.username);
-      setRole(user.role);
-      setIsLoggedIn(true);
-      setProfileImage(user.profileImage);
-      navigate("/");
-    } else {
-      alert("Login failed. Please check your credentials.");
+            setFirstName(firstName);
+            setLastName(lastName);
+            setUsername(username);
+            setRole(role);
+            setProfileImage(response.data.profileImage);
+            setIsLoggedIn(true);
+            navigate('/');
+        } else {
+            alert('Login failed. Please check your credentials.');
+        }
+    } catch (error) {
+        console.error('Login failed:', error);
+        alert('Login failed. Please check your credentials.');
     }
-
-    // setIsLoggedIn(true);
-    // navigate('/');
-    //     }
-    // } catch (error) {
-    //     console.error('Login failed:', error);
-    //     alert('Login failed. Please check your credentials.');
-    // }
   };
 
   return (
