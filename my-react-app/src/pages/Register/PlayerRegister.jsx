@@ -70,15 +70,10 @@ function PlayerRegister() {
             <Navbar />
             <div className="form-background">
                 <div className="form-warp">
-<<<<<<< HEAD
-                    <form action="">
-                        <h1 className="form-heading">Player Registation</h1>
-=======
                     <form onSubmit={handleSubmit}>
                         <h1 className="form-heading">
                             Player Registration
                         </h1>
->>>>>>> Kanchana_dev
 
                         <div className="form-input-box">
                             <input
