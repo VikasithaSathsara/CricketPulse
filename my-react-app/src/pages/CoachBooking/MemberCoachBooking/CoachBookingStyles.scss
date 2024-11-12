@@ -1,0 +1,23 @@
+@use "../../../colors/colors.scss" as colors;
+
+.coach-booking-container {
+    width: 100%;
+    height: 100%;
+    padding-top:85px;
+    padding-left: 80px;
+    padding-right: 80px;
+    margin-bottom: 10px;
+    background-color: colors.$primary-bg-color;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    .coach-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap:5px;
+      justify-content: space-between; 
+      padding-top:5px;
+    }
+  }

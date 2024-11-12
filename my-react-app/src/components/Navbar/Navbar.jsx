@@ -1,7 +1,7 @@
 import React from "react";
-import {  Link,NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./Navbar.scss";
-import icon from "../../assets/icon.png";
+import icon from "../../assets/images/icon.png";
 
 function Navbar() {
     return (
@@ -15,9 +15,7 @@ function Navbar() {
 
                 <ul class="menu">
                     <li>
-                        <Link to="/" >
-                            Home
-                        </Link>
+                        <Link to="/">Home</Link>
                     </li>
                     <li>
                         <Link to="/about" className="nav-link">

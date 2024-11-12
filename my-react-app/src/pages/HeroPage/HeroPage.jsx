@@ -1,7 +1,7 @@
 import React from "react";
 import "./HeroPage.scss";
 import Navbar from "../../components/Navbar/Navbar";
-import bgvideo from "../../assets/bgvideo.mp4";
+import bgvideo from "../../assets/images/bgvideo.mp4";
 import { useNavigate } from "react-router-dom";
 
 const HeroPage = () => {

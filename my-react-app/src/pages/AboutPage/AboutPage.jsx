@@ -1,7 +1,7 @@
 import React from "react";
 import "./AboutPage.scss";
 import Navbar from "../../components/Navbar/Navbar";
-import aboutbg from "../../assets/aboutbg.mp4";
+import aboutbg from "../../assets/images/aboutbg.mp4";
 
 function AboutPage() {
     return (
