@@ -20,7 +20,7 @@ const BookingPage_coach = () => {
     const navigateToCoaches = useNavigate();
 
     const formatTimeSlot = (slot) => {
-        return `${slot.start.time} ${slot.start.period} - ${slot.end.time} ${slot.end.period}`;
+        return `${slot.start.time} - ${slot.end.time}`;
     };
 
     const tags_ = timeSlots.map(formatTimeSlot);
@@ -137,7 +137,7 @@ const BookingPage_coach = () => {
                     />
                 </div>
                 <div className="availability-info">
-                    <p>Available Slots On:</p>
+                    <p>Available Time Slots On:</p>
                     <label>{selectedDate.toLocaleDateString()}</label>
                 </div>
 
