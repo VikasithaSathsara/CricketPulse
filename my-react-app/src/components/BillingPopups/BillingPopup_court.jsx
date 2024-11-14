@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./BillingPopup.scss";
+import "./BillingPopups.scss";
 import crypto from "crypto-js";
 import { IoMdCloseCircle } from "react-icons/io";
 
-const BillingPopup = ({ appointmentDetails, onClose }) => {
+const BillingPopup_court = ({ appointmentDetails, onClose }) => {
     const [paymentMethod, setPaymentMethod] = useState("Cash");
     const { date, coach, selectedSlots } = appointmentDetails;
     const chargePerSlot = 800;
@@ -96,7 +96,7 @@ const BillingPopup = ({ appointmentDetails, onClose }) => {
                     </p>
                     <p>
                         <span>
-                            <strong>Coach :</strong> {coach}{" "}
+                            <strong>Court :</strong> {coach}{" "}
                         </span>
                     </p>
                     <p>
@@ -140,4 +140,4 @@ const BillingPopup = ({ appointmentDetails, onClose }) => {
     );
 };
 
-export default BillingPopup;
+export default BillingPopup_court;

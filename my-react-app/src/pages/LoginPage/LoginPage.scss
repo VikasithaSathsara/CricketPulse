@@ -39,15 +39,17 @@
   height: 100%;
   outline: none;
   border-radius: 40px;
-  color: colors.$primary-font-color;
+  color: colors.$secondary-color;
+  font-size: 17px;
   padding: 20px 45px 20px 20px;
-  background: transparent;
-  border: 2px solid colors.$primary-font-color;
+  background: #ffffff65;
+  border: 2px solid colors.$secondary-color;
+ 
 }
 
 .input-box input::placeholder {
-  color: colors.$primary-font-color;
-  font-size: 14px;
+  color: colors.$secondary-color;
+  font-size: 17px;
 }
 
 .forgot {

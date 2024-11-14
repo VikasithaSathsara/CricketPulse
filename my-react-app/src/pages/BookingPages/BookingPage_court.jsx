@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState, useContext } from "react";
 import DatePicker from "../../components/DatePicker/DatePicker";
-import BillingPopup from "../../components/BillingPopup/BillingPopup";
+import BillingPopup_court from "../../components/BillingPopups/BillingPopup_court";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
 import { StoreContext } from "../../StoreContext/StoreContext";
 import timeSlots from "../../assets/timeSlots";
 import "./BookingPagesStyles.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BookingPage_court = () => {
     const { selectedCourt } = useContext(StoreContext);
@@ -52,6 +54,10 @@ const BookingPage_court = () => {
     };
 
     const handleCheckout = () => {
+        if (selected.length === 0) {
+            toast.error("Please select a time slot");
+            return;
+        }
         setShowPopup(true);
     };
 
@@ -62,11 +68,14 @@ const BookingPage_court = () => {
     useEffect(() => {
         window.payhere.onCompleted = function onCompleted(orderId) {
             console.log("Payment completed. OrderID:" + orderId);
+
             if (orderId) {
                 updateSelectedCourt(null);
             }
             setShowPopup(false);
-            navigate("/appointments");
+            setTimeout(function () {
+                window.location.replace("/dashboard");
+            }, 1000);
         };
 
         window.payhere.onDismissed = function onDismissed() {
@@ -83,6 +92,18 @@ const BookingPage_court = () => {
 
     return (
         <div className="booking-container">
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             {selectedCourt ? (
                 <div className="coach-container">
                     <div className="coach-container-left">
@@ -188,7 +209,7 @@ const BookingPage_court = () => {
                         Proceed To Checkout
                     </button>
                     {showPopup && (
-                        <BillingPopup
+                        <BillingPopup_court
                             appointmentDetails={appointmentDetails}
                             onClose={closePopup}
                         />

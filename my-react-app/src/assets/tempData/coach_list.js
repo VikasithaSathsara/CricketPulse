@@ -67,5 +67,17 @@ const coach_list = [
     specialize: "clinical Psychologists",
     coach_img: "https://media.gettyimages.com/id/1468678624/photo/nurse-hospital-employee-and-portrait-of-black-man-in-a-healthcare-wellness-and-clinic-feeling.jpg?s=612x612&w=0&k=20&c=AGQPyeEitUPVm3ud_h5_yVX4NKY9mVyXbFf50ZIEtQI=",
   },
+  {
+    coach_id: 13,
+    name: "Vivek k Bansode",
+    specialize: "clinical Psychologists",
+    coach_img: "https://media.gettyimages.com/id/1468678624/photo/nurse-hospital-employee-and-portrait-of-black-man-in-a-healthcare-wellness-and-clinic-feeling.jpg?s=612x612&w=0&k=20&c=AGQPyeEitUPVm3ud_h5_yVX4NKY9mVyXbFf50ZIEtQI=",
+  },
+  {
+    coach_id: 14,
+    name: "Vivek k Bansode",
+    specialize: "clinical Psychologists",
+    coach_img: "https://media.gettyimages.com/id/1468678624/photo/nurse-hospital-employee-and-portrait-of-black-man-in-a-healthcare-wellness-and-clinic-feeling.jpg?s=612x612&w=0&k=20&c=AGQPyeEitUPVm3ud_h5_yVX4NKY9mVyXbFf50ZIEtQI=",
+  },
 ];
 export default coach_list;

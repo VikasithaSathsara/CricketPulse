@@ -17,10 +17,11 @@ import { StoreContext } from "../../StoreContext/StoreContext";
 import {
     MdAssignmentAdd,
     MdLogout,
+    MdSportsCricket,
     MdOutlinePendingActions,
 } from "react-icons/md";
 import { FaUsers } from "react-icons/fa6";
-import Swal from "sweetalert2"; // Import SweetAlert2
+import Swal from "sweetalert2";
 import "./SideBarStyles.scss";
 import UserProfileCard from "../../components/ProfileCard/ProfileCard";
 
@@ -94,7 +95,7 @@ const SideBar = () => {
                                 <Link to="/court-bookings">
                                     <MdAssignmentAdd size={20} />
                                 </Link>
-                                <span>Book A Court</span>
+                                <span>Book a Court</span>
                             </button>
                         )}
 
@@ -104,9 +105,9 @@ const SideBar = () => {
                                 className="nav-item-new-apointment"
                             >
                                 <Link to="/coach-bookings">
-                                    <MdAssignmentAdd size={20} />
+                                    <FaAddressBook size={19} />
                                 </Link>
-                                <span>New Coaching Session</span>
+                                <span>Book a Coach</span>
                             </button>
                         )}
 
@@ -165,27 +166,34 @@ const SideBar = () => {
                                     <>
                                         <li className="side-item">
                                             <Link to="/dashboard">
-                                                <FaHome />
+                                                <FaHome size={20} />
                                                 <span> Dashboard </span>
                                             </Link>
                                         </li>
 
                                         <li className="side-item">
                                             <Link to="/court-bookings">
-                                                <FaAddressBook />
-                                                <span>Court Bookigs</span>
+                                                <MdAssignmentAdd size={20} />
+                                                <span>Book a Court</span>
+                                            </Link>
+                                        </li>
+
+                                        <li className="side-item">
+                                            <Link to="/coach-bookings">
+                                                <FaAddressBook size={20} />
+                                                <span>Book a Coach</span>
                                             </Link>
                                         </li>
 
                                         <li className="side-item">
                                             <Link to="/sessions">
-                                                <PiCricketFill size={20} />
+                                                <MdSportsCricket size={20} />
                                                 <span>Sessions</span>
                                             </Link>
                                         </li>
                                         <li className="side-item">
                                             <Link to="/profile">
-                                                <FaUserCircle />
+                                                <FaUserCircle size={20} />
                                                 <span>Profile </span>
                                             </Link>
                                         </li>

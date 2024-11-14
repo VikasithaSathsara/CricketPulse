@@ -1,108 +1,123 @@
-import { useState, useContext, Profiler } from 'react';
-import axios from 'axios'; 
+import { useState, useContext, Profiler } from "react";
+import axios from "axios";
 import "./LoginPage.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
-import { StoreContext } from '../../StoreContext/StoreContext';
-import testUsers from '../../assets/tempData/testUsers';
-
+import { StoreContext } from "../../StoreContext/StoreContext";
+import { FaLock } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import testUsers from "../../assets/tempData/testUsers";
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
-  const { setIsLoggedIn, setFirstName, setRole, setUsername, setLastName , setProfileImage } =
-    useContext(StoreContext);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+    const {
+        setIsLoggedIn,
+        setFirstName,
+        setRole,
+        setUsername,
+        setLastName,
+        setProfileImage,
+    } = useContext(StoreContext);
 
- 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-    try {
-        const response = await axios.post('http://localhost:8080/api/users/authenticate', {
-            email: email,
-            password: password
-        });
+        try {
+            const response = await axios.post(
+                "http://localhost:8080/api/users/authenticate",
+                {
+                    email: email,
+                    password: password,
+                }
+            );
 
-        console.log("login-res",response)
+            console.log("login-res", response);
 
-        if (response.status === 200 ) {
-            const role = response.data.role;
-            const firstName = response.data.firstName;
-            const lastName = response.data.lastName;
-            const username = response.data.username;
+            if (response.status === 200) {
+                const role = response.data.role;
+                const firstName = response.data.firstName;
+                const lastName = response.data.lastName;
+                const username = response.data.username;
 
-            console.log("First Name:", firstName);
-            console.log("Last Name:", lastName);
-            console.log("Role:", role);
-            console.log("username", username);
+                console.log("First Name:", firstName);
+                console.log("Last Name:", lastName);
+                console.log("Role:", role);
+                console.log("username", username);
 
-            setFirstName(firstName);
-            setLastName(lastName);
-            setUsername(username);
-            setRole(role);
-            setProfileImage(response.data.profileImage);
-            setIsLoggedIn(true);
-            navigate('/');
-        } else {
-            alert('Login failed. Please check your credentials.');
+                setFirstName(firstName);
+                setLastName(lastName);
+                setUsername(username);
+                setRole(role);
+                setProfileImage(response.data.profileImage);
+                setIsLoggedIn(true);
+                navigate("/dashboard");
+            } else {
+                toast.error("Login failed");
+            }
+        } catch (error) {
+            console.error("Login failed:", error);
+            toast.error("Login failed");
         }
-    } catch (error) {
-        console.error('Login failed:', error);
-        alert('Login failed. Please check your credentials.');
-    }
-  };
+    };
 
-  return (
-    <div>
-      <Navbar />
-      <div className="toast-container-wrapper">
-        {/* <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="colored"
-            /> */}
-      </div>
-      <div className="login-background">
-        <div className="warp">
-          <form onSubmit={handleSubmit}>
-            <h1 className="heading">Login</h1>
-
-            <div className="input-box">
-              <input
-                type="email"
-                placeholder="Enter Email"
-                className="form-control"
-                id="exampleInputEmail1"
-                onChange={(event) => setEmail(event.target.value)}
-                required
-              />
-
-              {/* <FaUser className="icon" /> */}
+    return (
+        <div>
+            <Navbar />
+            <div className="toast-container-wrapper">
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                />
             </div>
+            <div className="login-background">
+                <div className="warp">
+                    <form onSubmit={handleSubmit}>
+                        <h1 className="heading">Login</h1>
 
-            <div className="input-box">
-              <input
-                type="password"
-                placeholder="Enter Password"
-                className="form-control"
-                id="exampleInputPassword1"
-                onChange={(event) => setPassword(event.target.value)}
-                required
-              />
-              {/* <FaLock className="icon" /> */}
-            </div>
+                        <div className="input-box">
+                            <input
+                                type="email"
+                                placeholder="Enter Email"
+                                className="form-control"
+                                id="exampleInputEmail1"
+                                onChange={(event) =>
+                                    setEmail(event.target.value)
+                                }
+                                required
+                            />
 
-            <button type="submit" className="login">
-              Login
-            </button>
+                            <FaUser className="icon" color="black" />
+                        </div>
+
+                        <div className="input-box">
+                            <input
+                                type="password"
+                                placeholder="Enter Password"
+                                className="form-control"
+                                id="exampleInputPassword1"
+                                onChange={(event) =>
+                                    setPassword(event.target.value)
+                                }
+                                required
+                            />
+                            <FaLock className="icon" color="black" />
+                        </div>
+
+                        <button type="submit" className="login">
+                            Login
+                        </button>
 
                         <div className="signup">
                             <p>

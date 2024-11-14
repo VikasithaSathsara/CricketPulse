@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Register.scss";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function PlayerRegister() {
     const navigate = useNavigate();
@@ -45,23 +47,28 @@ function PlayerRegister() {
         };
 
         try {
-            const response = await fetch("http://localhost:8080/api/users/create-user", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(requestBody),
-            });
+            const response = await fetch(
+                "http://localhost:8080/api/users/create-user",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(requestBody),
+                }
+            );
 
             if (response.ok) {
-                alert("User registered successfully");
-                navigate("/");
+                toast.success("Registration Successful");
+                setTimeout(function () {
+                    window.location.replace("/");
+                }, 1300);
             } else {
-                alert("Failed to register user");
+                toast.error("Registration failed");
             }
         } catch (error) {
             console.error("Error:", error);
-            alert("An error occurred while registering the user");
+            toast.error("Registration failed");
         }
     };
 
@@ -69,11 +76,21 @@ function PlayerRegister() {
         <div>
             <Navbar />
             <div className="form-background">
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                />
                 <div className="form-warp">
                     <form onSubmit={handleSubmit}>
-                        <h1 className="form-heading">
-                            Player Registration
-                        </h1>
+                        <h1 className="form-heading">Player Registration</h1>
 
                         <div className="form-input-box">
                             <input

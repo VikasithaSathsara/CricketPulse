@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState, useContext } from "react";
 import DatePicker from "../../components/DatePicker/DatePicker";
-import BillingPopup from "../../components/BillingPopup/BillingPopup";
+import BillingPopup_coach from "../../components/BillingPopups/BillingPopup_coach";
 import { useLocation, useNavigate } from "react-router-dom";
 import { IoMdCloseCircle } from "react-icons/io";
 import { StoreContext } from "../../StoreContext/StoreContext";
 import timeSlots from "../../assets/timeSlots";
 import "./BookingPagesStyles.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const BookingPage_coach = () => {
     const { selectedCoach } = useContext(StoreContext);
@@ -52,6 +54,10 @@ const BookingPage_coach = () => {
     };
 
     const handleCheckout = () => {
+        if (selected.length === 0) {
+            toast.error("Please select a time slot.");
+            return;
+        }
         setShowPopup(true);
     };
 
@@ -66,7 +72,9 @@ const BookingPage_coach = () => {
                 updateSelectedCoach(null);
             }
             setShowPopup(false);
-            navigate("/appointments");
+            setTimeout(function () {
+                window.location.replace("/dashboard");
+            }, 1000);
         };
 
         window.payhere.onDismissed = function onDismissed() {
@@ -83,6 +91,18 @@ const BookingPage_coach = () => {
 
     return (
         <div className="booking-container">
+            <ToastContainer
+                position="top-center"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
             {selectedCoach ? (
                 <div className="coach-container">
                     <div className="coach-container-left">
@@ -188,7 +208,7 @@ const BookingPage_coach = () => {
                         Proceed To Checkout
                     </button>
                     {showPopup && (
-                        <BillingPopup
+                        <BillingPopup_coach
                             appointmentDetails={appointmentDetails}
                             onClose={closePopup}
                         />

@@ -2,7 +2,8 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Register.scss";
 import { useNavigate } from "react-router-dom";
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useState } from "react";
 import axios from "axios";
 
@@ -47,14 +48,19 @@ function CoachRegister() {
         };
 
         try {
-            const response = await axios.post("http://localhost:8080/api/users/create-user", requestBody);
+            const response = await axios.post(
+                "http://localhost:8080/api/users/create-user",
+                requestBody
+            );
             if (response.status === 200) {
-                alert("Coach registered successfully");
-                navigate("/");
+                toast.success("Registration Successful");
+                setTimeout(function () {
+                    window.location.replace("/");
+                }, 1300);
             }
         } catch (error) {
             console.error("There was an error registering the coach!", error);
-            alert("Coach Already Exists!");
+            toast.error("Registration failed");
         }
     };
 
@@ -67,9 +73,23 @@ function CoachRegister() {
                     backgroundImage: `url('https://mir-s3-cdn-cf.behance.net/project_modules/1400_opt_1/b5a72f50126031.58c81b1abf0a0.jpg')`,
                 }}
             >
+                <ToastContainer
+                    position="top-right"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="colored"
+                />
                 <div className="form-warp">
                     <form onSubmit={handleSubmit}>
-                        <h1 className="form-heading">Coach Registration Form</h1>
+                        <h1 className="form-heading">
+                            Coach Registration Form
+                        </h1>
 
                         <div className="form-input-box">
                             <input

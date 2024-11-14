@@ -1,7 +1,7 @@
 @use '../../colors/colors' as sysColors;
 .dash-board-navbar {
   background-color: sysColors.$primary-color;
-  height: 70px;
+  height: 80px;
   display: flex;
   justify-content: start;
   align-items: center;
@@ -61,7 +61,7 @@
 }
 
 .nav-item-new-apointment span {
-  margin-left: 8px;
+  margin-left: 15px;
   font-weight: Bold;
   font-family:Inter
 }
@@ -71,10 +71,11 @@
 .side-item a {
   display: flex;
   align-items: center;
-  padding: 7px;
-  padding-top: 2px;
-  padding-bottom: 2px;
-  width: 160px;
+  margin-top: 15px;
+  padding: 8px;
+  font-size: 18px;
+  margin-left: 20px;
+  width: 200px;
   list-style: none;
   height: 50px;
   text-decoration: none;
@@ -86,7 +87,7 @@
     background: sysColors.$primary-color-hover;
     display: flex;
     align-items: center;
-    width: 160px;
+    width: 200px;
     list-style: none;
     height: 50px;
     //border: 1px solid #f5f5f583;
@@ -107,7 +108,7 @@
 
 .nav-menu {
   background: sysColors.$primary-color;
-  width: 175px;
+  width: 240px;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -137,6 +138,7 @@
   display: flex;
   justify-content: start;
   align-items: center;
+  margin-bottom: 50px;
 }
 span {
   margin-left: 16px;
@@ -160,16 +162,16 @@ span {
 
 .login-out-btn {
   position: relative;
-  top: 110px;
-  left: 20px;
+  top: 40px;
+  left: 30px;
   background-color: sysColors.$primary-color;
   color: white;
-  border: 2px solid#f5f5f55d;
+  border: 3px solid#f5f5f55d;
   border-radius: 10px;
-  font-size: 14px;
+  font-size: 18px;
   width: 45px;
   height: 40px;
-  padding-left: 2px;
+  padding-top: 2px;
   padding-right: 10px;
   cursor: pointer;
   transition: background-color 0.3s ease;
