@@ -14,8 +14,14 @@ const CoachCard = ({ coach }) => {
     };
     return (
         <div className="coach-card">
-            <img src={coach.coach_img} alt={coach.name} className="coach-img" />
-            <h3 className="coach-name">{coach.name}</h3>
+            <img
+                src={coach.profilePic}
+                alt={coach.name}
+                className="coach-img"
+            />
+            <h3 className="coach-name">
+                {coach.firstName} {coach.lastName}
+            </h3>
             <p className="coach-specialize">{coach.specialize}</p>
             <div className="button-container">
                 <button className="appointment-button" onClick={handleNavigate}>
