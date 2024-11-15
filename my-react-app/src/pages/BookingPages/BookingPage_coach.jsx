@@ -14,17 +14,13 @@ const BookingPage_coach = () => {
     const {
         selectedCoach,
         userId,
-        updateSelectedCoach,
-        selectedSlots,
-        addSlot,
-        setSelectedSlots,
     } = useContext(StoreContext);
     const [query, setQuery] = useState("");
-    const [selected, setSelected] = useState([]);
+    const [selectedSlot, setSelectedSlot] = useState(null);
     const [menuOpen, setMenuOpen] = useState(true);
     const navigate = useNavigate();
     useEffect(() => {
-        setSelectedSlots([]);
+        setSelectedSlot(null);
     }, []);
 
     const formatTimeSlot = (slot) => {
@@ -38,7 +34,7 @@ const BookingPage_coach = () => {
             item
                 .toLocaleLowerCase()
                 .includes(query.toLocaleLowerCase().trim()) &&
-            !selected.includes(item)
+            item !== selectedSlot
     );
 
     const getFirstDayOfCurrentMonth = () => {
@@ -51,18 +47,18 @@ const BookingPage_coach = () => {
     );
 
     useEffect(() => {
-        setSelected([]);
+        setSelectedSlot(null);
     }, [selectedDate]);
 
     const [showPopup, setShowPopup] = useState(false);
     const appointmentDetails = {
         date: selectedDate.toLocaleDateString(),
         coach: selectedCoach,
-        selectedSlots: selected,
+        selectedSlot: selectedSlot,
     };
 
     const handleCheckout = () => {
-        if (selected.length === 0) {
+        if (!selectedSlot) {
             toast.error("Please select a time slot.");
             return;
         }
@@ -75,7 +71,7 @@ const BookingPage_coach = () => {
 
     const handlePaymentCompletion = async (orderId) => {
         console.log("Payment completed. OrderID:" + orderId);
-        console.log("Selected Slots:", selectedSlots);
+        console.log("Selected Slot:", selectedSlot);
         console.log("Selected Coach:", selectedCoach);
         if (orderId) {
             try {
@@ -88,32 +84,29 @@ const BookingPage_coach = () => {
                 if (!selectedDate) {
                     throw new Error("Selected date is not defined");
                 }
-                if (!selectedSlots || selectedSlots.length === 0) {
-                    throw new Error("Selected slots are not defined");
+                if (!selectedSlot) {
+                    throw new Error("Selected slot is not defined");
                 }
 
+                const [startTime, endTime] = selectedSlot.split(" - ");
                 const response = await axios.post(
                     "http://localhost:8080/api/coach-bookings/create",
                     {
                         coachId: selectedCoach.id,
                         memberId: userId,
                         date: selectedDate.toISOString().split("T")[0],
-                        slotCount: selectedSlots.length,
-                        timeSlots: selectedSlots.map((slot) => ({
-                            startTime: slot.startTime,
-                            endTime: slot.endTime,
-                            description: slot.description,
-                        })),
+                        startTime: startTime,
+                        endTime: endTime,
+                        description: "Training session",
                     }
                 );
 
                 console.log("Booking response:", response.data);
-                updateSelectedCoach(null);
                 setShowPopup(false);
                 setTimeout(() => {
                     window.location.replace("/dashboard");
                 }, 1000);
-                setSelectedSlots([]);
+                setSelectedSlot(null);
             } catch (error) {
                 console.error("Error creating booking:", error);
             }
@@ -193,55 +186,27 @@ const BookingPage_coach = () => {
                     <label>{selectedDate.toLocaleDateString()}</label>
                 </div>
 
-                {selected.length ? (
+                {selectedSlot && (
                     <div className="selected-slots">
-                        <div className="slot-label">Selected Slots :</div>
+                        <div className="slot-label">Selected Slot :</div>
 
                         <div className="slot-chips">
-                            {selected.map((tag, index) => (
-                                <div
-                                    key={`${tag}-${index}`}
-                                    className="slot-item"
-                                >
-                                    {tag}
-                                    <div
-                                        onMouseDown={(e) => e.preventDefault()}
-                                    >
-                                        <IoMdCloseCircle
-                                            onClick={() => {
-                                                setSelected(
-                                                    selected.filter(
-                                                        (i) => i !== tag
-                                                    )
-                                                );
-                                                setSelectedSlots(
-                                                    selectedSlots.filter(
-                                                        (slot) =>
-                                                            `${slot.startTime} - ${slot.endTime}` !==
-                                                            tag
-                                                    )
-                                                );
-                                            }}
-                                            size="20px"
-                                            style={{ cursor: "pointer" }}
-                                        />
-                                    </div>
+                            <div className="slot-item">
+                                {selectedSlot}
+                                <div onMouseDown={(e) => e.preventDefault()}>
+                                    <IoMdCloseCircle
+                                        onClick={() => {
+                                            setSelectedSlot(null);
+                                        }}
+                                        size="20px"
+                                        style={{ cursor: "pointer" }}
+                                    />
                                 </div>
-                            ))}
-                        </div>
-
-                        <div
-                            className="clear-all"
-                            onClick={() => {
-                                setSelected([]);
-                                setSelectedSlots([]);
-                            }}
-                        >
-                            Clear all
+                            </div>
                         </div>
                     </div>
-                ) : null}
-                <p>Select Your Slots:</p>
+                )}
+                <p>Pick Your Slot:</p>
                 {menuOpen && (
                     <div className="slot-menu">
                         <ul>
@@ -252,17 +217,7 @@ const BookingPage_coach = () => {
                                         onMouseDown={(e) => e.preventDefault()}
                                         onClick={() => {
                                             setMenuOpen(true);
-                                            setSelected((prev) => [
-                                                ...prev,
-                                                tag,
-                                            ]);
-                                            const [startTime, endTime] =
-                                                tag.split(" - ");
-                                            addSlot(
-                                                startTime,
-                                                endTime,
-                                                "Session"
-                                            );
+                                            setSelectedSlot(tag);
                                             setQuery("");
                                         }}
                                     >

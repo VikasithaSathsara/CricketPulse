@@ -98,6 +98,7 @@
     }
 
     .selected-slots {
+      display: flex;
       .availability-info {
         display: flex;
         align-items: center;
@@ -125,13 +126,15 @@
       margin-bottom: 0.5rem;
 
       .slot-label {
+        margin: 5px;
+        margin-top: 15px;
         font-weight: 400;
-        color: colors.$font-color-gray;
+        color: #4b5563;
       }
 
       .slot-chips {
-        margin: 10px;
-        margin-top: 10px;
+        // margin: 10px;
+        // margin-top: 10px;
         gap: 5px;
 
         .slot-item {

@@ -5,9 +5,9 @@ import { IoMdCloseCircle } from "react-icons/io";
 
 const BillingPopup_coach = ({ appointmentDetails, onClose }) => {
     const [paymentMethod, setPaymentMethod] = useState("Cash");
-    const { date, coach, selectedSlots } = appointmentDetails;
+    const { date, coach, selectedSlot } = appointmentDetails;
     const chargePerSlot = 800;
-    const totalAmount = selectedSlots.length * chargePerSlot;
+    const totalAmount = chargePerSlot;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,7 +34,7 @@ const BillingPopup_coach = ({ appointmentDetails, onClose }) => {
         const paymentDetails = {
             merchant_id: "1228323",
             order_id: "ItemNo12345",
-            amount: "2400.00",
+            amount: "800.00",
             currency: "LKR",
             merchant_secret:
                 "MTU5Mzk0MjgzMDQxMzAxMzEyMDUxODAwNTE5NTEyMzM5MzY2MDM3NQ==",
@@ -55,7 +55,7 @@ const BillingPopup_coach = ({ appointmentDetails, onClose }) => {
             cancel_url: undefined,
             notify_url: "http://localhost:5174/appointments",
             order_id: paymentDetails.order_id,
-            items: "Door bell wireless",
+            items: "Training session",
             amount: paymentDetails.amount,
             currency: paymentDetails.currency,
             hash: hash,
@@ -101,33 +101,19 @@ const BillingPopup_coach = ({ appointmentDetails, onClose }) => {
                     </p>
                     <p>
                         <span>
-                            <strong>Selected Slots:</strong>
+                            <strong>Selected Slot:</strong> {selectedSlot}
                         </span>
                     </p>
-
-                    <div style={{ overflowY: "scroll", maxHeight: "60px" }}>
-                        <ul>
-                            {selectedSlots.map((slot, index) => (
-                                <li key={index}>{slot}</li>
-                            ))}
-                        </ul>
-                    </div>
                 </div>
                 <div className="charges">
                     <p>
                         <span>
-                            <strong>Charge per Slot:</strong> Rs.{" "}
-                            {chargePerSlot}{" "}
+                            <strong>Charge per Slot:</strong> Rs. {chargePerSlot}
                         </span>
                     </p>
                     <p>
                         <span>
-                            <strong>Slot Count:</strong> {selectedSlots.length}
-                        </span>
-                    </p>
-                    <p>
-                        <span>
-                            <strong>Total Amount:</strong>Rs. {totalAmount}
+                            <strong>Total Amount:</strong> Rs. {totalAmount}
                         </span>
                     </p>
                 </div>
