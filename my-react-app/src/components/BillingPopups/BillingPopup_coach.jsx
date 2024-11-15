@@ -96,7 +96,7 @@ const BillingPopup_coach = ({ appointmentDetails, onClose }) => {
                     </p>
                     <p>
                         <span>
-                            <strong>Coach :</strong> {coach}{" "}
+                            <strong>Coach :</strong> {coach.firstName} {coach.lastName}
                         </span>
                     </p>
                     <p>

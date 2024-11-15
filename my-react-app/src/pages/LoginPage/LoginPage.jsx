@@ -16,6 +16,7 @@ function LoginPage() {
     const navigate = useNavigate();
     const {
         setIsLoggedIn,
+        setUserId,
         setFirstName,
         setRole,
         setUsername,
@@ -47,7 +48,8 @@ function LoginPage() {
                 console.log("Last Name:", lastName);
                 console.log("Role:", role);
                 console.log("username", username);
-
+                
+                setUserId(response.data.id);
                 setFirstName(firstName);
                 setLastName(lastName);
                 setUsername(username);

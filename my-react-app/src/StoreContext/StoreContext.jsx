@@ -10,7 +10,9 @@ const StoreContextProvider = (props) => {
     const [isLoggedIn, setIsLoggedIn] = useState(() => {
         return localStorage.getItem("isLoggedIn") === "true";
     });
-
+    const [userId, setUserId] = useState(
+        () => localStorage.getItem("userId") || ""
+    );
     const [username, setUsername] = useState(
         () => localStorage.getItem("username") || ""
     );
@@ -34,6 +36,16 @@ const StoreContextProvider = (props) => {
     const updateSelectedCourt = (court) => {
         setSelectedCourt(court);
     };
+    const [selectedSlots, setSelectedSlots] = useState([]);
+
+    const addSlot = (startTime, endTime, description) => {
+        setSelectedSlots(prevSlots => [
+          ...prevSlots,
+          { startTime, endTime, description }
+        ]);
+      };
+
+      
 
     useEffect(() => {
         localStorage.setItem("isLoggedIn", isLoggedIn);
@@ -41,28 +53,40 @@ const StoreContextProvider = (props) => {
         localStorage.setItem("firstName", firstName);
         localStorage.setItem("lastName", lastName);
         localStorage.setItem("role", role);
-    }, [isLoggedIn, firstName, lastName, role]);
+        localStorage.setItem("profileImage", profileImage);
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("selectedCoach", JSON.stringify(selectedCoach));
+
+    }, [isLoggedIn,username, firstName, lastName, role,profileImage, userId, selectedCoach, selectedCourt, selectedSlots]);
+
 
     const handleLogout = () => {
         setIsLoggedIn(false);
+        setUserId("");
         setUsername("");
         setFirstName("");
         setLastName("");
         setRole("");
         setProfileImage("");
+        updateSelectedCoach("")
+        updateSelectedCourt("")
+        setSelectedSlots([])
         localStorage.clear();
         navigate("/");
     };
 
     const contextValue = {
         isLoggedIn,
+        userId,
         username,
         profileImage,
         selectedCoach,
         selectedCourt,
+        selectedSlots,  
         firstName,
         lastName,
         role,
+        setUserId,
         setIsLoggedIn,
         setUsername,
         setFirstName,
@@ -72,6 +96,8 @@ const StoreContextProvider = (props) => {
         setProfileImage,
         updateSelectedCoach,
         updateSelectedCourt,
+        setSelectedSlots,
+        addSlot
     };
 
     return (
