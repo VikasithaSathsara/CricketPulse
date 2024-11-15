@@ -20,12 +20,19 @@ const CourtCard = ({ court }) => {
                 alt={court.court_img}
                 className="court-img"
             />
-            <p className="court-id">{court.court_id}</p>
+            <p className="court-id">Court {court.court_id}</p>
             <h3 className="court-name">{court.court_name}</h3>
-            <button className="appointment-button" onClick={handleNavigate}>
-                <MdAssignmentAdd className="appointment-icon" /> Make an
-                Appointment
-            </button>
+            <div className="button-container">
+                <div className="button-container">
+                    <button
+                        className="appointment-button"
+                        onClick={handleNavigate}
+                    >
+                        <MdAssignmentAdd className="appointment-icon" /> Make an
+                        Appointment
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };

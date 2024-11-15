@@ -1,15 +1,17 @@
 @use "../../colors/colors.scss" as colors;
 
 .coach-card {
-  background-color: colors.$card-bg-color;
+  background-color: #ffffff43;
   border-radius: 8px;
   padding: 12px;
   text-align: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 15px;
-  width: 250px; 
+  margin-bottom: 40px;
+  width: 280px;
+  height: 345px;
   &:hover{
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.377);
+    box-shadow: 0px 15px 15px rgba(0, 0, 0, 0.607);
+    border: solid 2px #e0e0e0;
   }
 }
 
@@ -26,35 +28,40 @@
 }
 
 .coach-specialize {
-  color: #61666b;
+  color: #000000;
   font-weight: 500;
-  font-size: 0.9rem;
-  margin-bottom: 6px
+  font-size: 1.1rem;
+  margin-bottom: 6px;
+  margin-top: 8px;
+  margin-bottom: 13px;
 }
 
-// Styles for the button
-.appointment-button {
-  background-color: colors.$secondary-color;
-  color: white;
-  border: none;
-  border-radius: 7px;
-  padding: 10px 10px;
-  font-size: 0.9rem;
-  font-weight: 400;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  transition: background-color 0.3s;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-top: 2px;
-  &:hover {
-    background-color:colors.$secondary-color-hover;
-  }
-}
+// // Styles for the button
+// .appointment-button {
+//   background-color: colors.$secondary-color;
+//   color: white;
+//   border: none;
+//   border-radius: 7px;
+//   padding: 10px 10px;
+//   font-size: 0.9rem;
+//   font-weight: 400;
+//   cursor: pointer;
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-evenly;
+//   transition: background-color 0.3s;
+//   margin-left: 20px;
+//   margin-right: 20px;
+//   margin-top: 2px;
+//   &:hover {
+//    // background-color:colors.$secondary-color-hover;
+//    background-color: rgb(242, 255, 0);
+//     color: #000000;
+//     border: solid 1px #000000;
+//   }
+// }
 
-.appointment-icon {
-  margin-right: 5px; 
+// .appointment-icon {
+//   margin-right: 5px; 
   
-}
+// }

@@ -91,7 +91,7 @@ const BookingPage_court = () => {
     const { coach } = location.state || {};
 
     return (
-        <div className="booking-container">
+        <div className="book-container">
             <ToastContainer
                 position="top-center"
                 autoClose={5000}
@@ -105,25 +105,29 @@ const BookingPage_court = () => {
                 theme="colored"
             />
             {selectedCourt ? (
-                <div className="coach-container">
-                    <div className="coach-container-left">
+                <div className="booking-container">
+                    <div className="booking-container-left">
                         <img
                             src={selectedCourt.court_img}
                             alt={selectedCourt.name}
-                            className="coach-img"
+                            className="booking-img"
                         />
                     </div>
-                    <div className="coach-container-right">
-                        <h3 className="coach-name">{selectedCourt.name}</h3>
-                        <p className="coach-specialize">
-                            {selectedCourt.court_id}
+                    <div className="booking-container-right">
+                        <h3 className="booking-name">
+                            {selectedCourt.court_name}
+                        </h3>
+                        <p className="booking-specialize">
+                            Court {selectedCourt.court_id}
                         </p>
-                        <p className="coach-specialize">
+                        <p className="booking-specialize">
                             Email: alicehs@gmail.com
                         </p>
-                        <p className="coach-specialize">Mobile: 076 0570 695</p>
-                        <p className="coach-specialize">Country: Sri Lanka</p>
-                        <p className="coach-specialize">City: Colombo</p>
+                        <p className="booking-specialize">
+                            Mobile: 076 0570 695
+                        </p>
+                        <p className="booking-specialize">Country: Sri Lanka</p>
+                        <p className="booking-specialize">City: Colombo</p>
                     </div>
                 </div>
             ) : (

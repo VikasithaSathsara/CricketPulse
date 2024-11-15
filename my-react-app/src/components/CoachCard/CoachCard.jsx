@@ -17,11 +17,12 @@ const CoachCard = ({ coach }) => {
             <img src={coach.coach_img} alt={coach.name} className="coach-img" />
             <h3 className="coach-name">{coach.name}</h3>
             <p className="coach-specialize">{coach.specialize}</p>
-            <button className="appointment-button" onClick={handleNavigate}>
-                <MdAssignmentAdd className="appointment-icon" />{" "}
-                {/* Add the icon here */}
-                Make an Appointment
-            </button>
+            <div className="button-container">
+                <button className="appointment-button" onClick={handleNavigate}>
+                    <MdAssignmentAdd className="appointment-icon" /> Make an
+                    Appointment
+                </button>
+            </div>
         </div>
     );
 };
