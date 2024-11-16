@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import DatePicker from "../../components/DatePicker/DatePicker";
 import BillingPopup_court from "../../components/BillingPopups/BillingPopup_court";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,19 +8,21 @@ import timeSlots from "../../assets/timeSlots";
 import "./BookingPagesStyles.scss";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 
 const BookingPage_court = () => {
-    const { selectedCourt } = useContext(StoreContext);
+    const { selectedCourt, userId } = useContext(StoreContext);
     const [query, setQuery] = useState("");
-    const [selected, setSelected] = useState([]);
+    const [selectedSlot, setSelectedSlot] = useState(null);
     const [menuOpen, setMenuOpen] = useState(true);
-    const { updateSelectedCourt } = useContext(StoreContext);
-
     const navigate = useNavigate();
-    const navigateToCourts = useNavigate();
+
+    useEffect(() => {
+        setSelectedSlot(null);
+    }, []);
 
     const formatTimeSlot = (slot) => {
-        return `${slot.start.time} ${slot.start.period} - ${slot.end.time} ${slot.end.period}`;
+        return `${slot.start.time} - ${slot.end.time}`;
     };
 
     const tags_ = timeSlots.map(formatTimeSlot);
@@ -30,7 +32,7 @@ const BookingPage_court = () => {
             item
                 .toLocaleLowerCase()
                 .includes(query.toLocaleLowerCase().trim()) &&
-            !selected.includes(item)
+            item !== selectedSlot
     );
 
     const getFirstDayOfCurrentMonth = () => {
@@ -43,19 +45,19 @@ const BookingPage_court = () => {
     );
 
     useEffect(() => {
-        setSelected([]);
+        setSelectedSlot(null);
     }, [selectedDate]);
 
     const [showPopup, setShowPopup] = useState(false);
     const appointmentDetails = {
         date: selectedDate.toLocaleDateString(),
-        court: selectedCourt ? selectedCourt.name : "",
-        selectedSlots: selected,
+        court: selectedCourt,
+        selectedSlot: selectedSlot,
     };
 
     const handleCheckout = () => {
-        if (selected.length === 0) {
-            toast.error("Please select a time slot");
+        if (!selectedSlot) {
+            toast.error("Please select a time slot.");
             return;
         }
         setShowPopup(true);
@@ -65,30 +67,69 @@ const BookingPage_court = () => {
         setShowPopup(false);
     };
 
-    useEffect(() => {
-        window.payhere.onCompleted = function onCompleted(orderId) {
-            console.log("Payment completed. OrderID:" + orderId);
+    const handlePaymentCompletion = async (orderId) => {
+        console.log("Payment completed. OrderID:" + orderId);
+        console.log("Selected Slot:", selectedSlot);
+        console.log("Selected Court:", selectedCourt);
+        if (orderId) {
+            try {
+                if (!selectedCourt || !selectedCourt.courtId) {
+                    throw new Error("Selected court is not defined");
+                }
+                if (!userId) {
+                    throw new Error("User ID is not defined");
+                }
+                if (!selectedDate) {
+                    throw new Error("Selected date is not defined");
+                }
+                if (!selectedSlot) {
+                    throw new Error("Selected slot is not defined");
+                }
 
-            if (orderId) {
-                updateSelectedCourt(null);
+                const [startTime, endTime] = selectedSlot.split(" - ");
+                const response = await axios.post(
+                    "http://localhost:8080/api/court-bookings/create",
+                    {
+                        courtId: selectedCourt.courtId,
+                        memberId: userId,
+                        date: selectedDate.toISOString().split("T")[0],
+                        startTime: startTime,
+                        endTime: endTime,
+                        description: "Tennis practice session",
+                    }
+                );
+
+                console.log("Booking response:", response.data);
+                setShowPopup(false);
+                setTimeout(() => {
+                    window.location.replace("/dashboard");
+                }, 1000);
+                setSelectedSlot(null);
+            } catch (error) {
+                console.error("Error creating booking:", error);
             }
-            setShowPopup(false);
-            setTimeout(function () {
-                window.location.replace("/dashboard");
-            }, 1000);
-        };
+        }
+    };
 
-        window.payhere.onDismissed = function onDismissed() {
-            console.log("Payment dismissed");
-        };
+    window.payhere.onCompleted = function onCompleted(orderId) {
+        handlePaymentCompletion(orderId);
+    };
+    window.payhere.onDismissed = function onDismissed() {
+        console.log("Payment dismissed");
+    };
 
-        window.payhere.onError = function onError(error) {
-            console.log("Error: " + error);
-        };
-    }, []);
+    window.payhere.onError = function onError(error) {
+        console.log("Error: " + error);
+    };
 
     const location = useLocation();
-    const { coach } = location.state || {};
+    const { court } = location.state || {};
+
+    useEffect(() => {
+        if (!selectedCourt) {
+            navigate("/court-bookings");
+        }
+    }, [selectedCourt, navigate]);
 
     return (
         <div className="book-container">
@@ -104,34 +145,27 @@ const BookingPage_court = () => {
                 pauseOnHover
                 theme="colored"
             />
-            {selectedCourt ? (
+            {selectedCourt && (
                 <div className="booking-container">
                     <div className="booking-container-left">
                         <img
-                            src={selectedCourt.court_img}
-                            alt={selectedCourt.name}
+                            src={selectedCourt.courtImg}
+                            alt={selectedCourt.courtName}
                             className="booking-img"
                         />
                     </div>
                     <div className="booking-container-right">
                         <h3 className="booking-name">
-                            {selectedCourt.court_name}
+                            {selectedCourt.courtName}
                         </h3>
                         <p className="booking-specialize">
-                            Court {selectedCourt.court_id}
+                            Court Id: {selectedCourt.courtId}
                         </p>
                         <p className="booking-specialize">
-                            Email: alicehs@gmail.com
+                            Court Type: {selectedCourt.courtType}
                         </p>
-                        <p className="booking-specialize">
-                            Mobile: 076 0570 695
-                        </p>
-                        <p className="booking-specialize">Country: Sri Lanka</p>
-                        <p className="booking-specialize">City: Colombo</p>
                     </div>
                 </div>
-            ) : (
-                navigateToCourts("/court-bookings")
             )}
 
             <div className="slot-selection">
@@ -142,60 +176,42 @@ const BookingPage_court = () => {
                     />
                 </div>
                 <div className="availability-info">
-                    <p>Available Slots On:</p>
+                    <p>Available Time Slots On:</p>
                     <label>{selectedDate.toLocaleDateString()}</label>
                 </div>
 
-                {selected.length ? (
+                {selectedSlot && (
                     <div className="selected-slots">
-                        <div className="slot-label">Selected Slots :</div>
+                        <div className="slot-label">Selected Slot :</div>
 
                         <div className="slot-chips">
-                            {selected.map((tag) => (
-                                <div key={tag} className="slot-item">
-                                    {tag}
-                                    <div
-                                        onMouseDown={(e) => e.preventDefault()}
-                                    >
-                                        <IoMdCloseCircle
-                                            onClick={() =>
-                                                setSelected(
-                                                    selected.filter(
-                                                        (i) => i !== tag
-                                                    )
-                                                )
-                                            }
-                                            size="20px"
-                                            style={{ cursor: "pointer" }}
-                                        />
-                                    </div>
+                            <div className="slot-item">
+                                {selectedSlot}
+                                <div onMouseDown={(e) => e.preventDefault()}>
+                                    <IoMdCloseCircle
+                                        onClick={() => {
+                                            setSelectedSlot(null);
+                                        }}
+                                        size="20px"
+                                        style={{ cursor: "pointer" }}
+                                    />
                                 </div>
-                            ))}
-                        </div>
-
-                        <div
-                            className="clear-all"
-                            onClick={() => setSelected([])}
-                        >
-                            Clear all
+                            </div>
                         </div>
                     </div>
-                ) : null}
-                <p>Select Your Slots:</p>
+                )}
+                <p>Pick Your Slot:</p>
                 {menuOpen && (
                     <div className="slot-menu">
                         <ul>
                             {filteredTags.length ? (
-                                filteredTags.map((tag) => (
+                                filteredTags.map((tag, index) => (
                                     <li
-                                        key={tag}
+                                        key={`${tag}-${index}`}
                                         onMouseDown={(e) => e.preventDefault()}
                                         onClick={() => {
                                             setMenuOpen(true);
-                                            setSelected((prev) => [
-                                                ...prev,
-                                                tag,
-                                            ]);
+                                            setSelectedSlot(tag);
                                             setQuery("");
                                         }}
                                     >

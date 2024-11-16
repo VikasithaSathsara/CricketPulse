@@ -16,12 +16,13 @@ const CourtCard = ({ court }) => {
     return (
         <div className="court-card">
             <img
-                src={court.court_img}
-                alt={court.court_img}
+                src={court.courtImg}
+                alt={court.courtImg}
                 className="court-img"
             />
-            <p className="court-id">Court {court.court_id}</p>
-            <h3 className="court-name">{court.court_name}</h3>
+            <p className="court-id">Court {court.courtId}</p>
+            <h4 className="court-name">{court.courtName}</h4>
+            <p>{court.courtType}</p>
             <div className="button-container">
                 <div className="button-container">
                     <button

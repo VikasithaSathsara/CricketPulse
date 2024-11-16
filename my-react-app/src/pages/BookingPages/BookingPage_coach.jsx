@@ -75,7 +75,7 @@ const BookingPage_coach = () => {
         console.log("Selected Coach:", selectedCoach);
         if (orderId) {
             try {
-                if (!selectedCoach || !selectedCoach.id) {
+                if (!selectedCoach || !selectedCoach.court_id) {
                     throw new Error("Selected coach is not defined");
                 }
                 if (!userId) {
