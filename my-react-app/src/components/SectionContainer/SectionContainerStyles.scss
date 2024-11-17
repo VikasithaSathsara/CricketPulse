@@ -1,13 +1,13 @@
 @use "../../colors/colors.scss" as colors;
 
 .section-container {
-    width: 95%;
-    background-color: transparent;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.295);
     border-radius: 10px;
     // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
     margin-top: 20px;
-    padding: 20px;
+    padding: 10px;
 }
   
   .section-title {
