@@ -61,13 +61,15 @@ const MemberCoachBookingDetails = () => {
   return (
     <div className="member-coach-booking-details">
       <SectionContainer title="Today's Sessions">
-        {todaySessions.length === 0 ? (
-          <p>No sessions for today.</p>
-        ) : (
-          todaySessions.map((booking) => (
-            <CoachBookingCard key={booking.id} coach_booking={booking} />
-          ))
-        )}
+        <div className="today-sesstions">
+          {todaySessions.length === 0 ? (
+            <p>No sessions for today.</p>
+          ) : (
+            todaySessions.map((booking) => (
+              <CoachBookingCard key={booking.id} coach_booking={booking} />
+            ))
+          )}
+        </div>
       </SectionContainer>
       <SectionContainer title="All Sessions">
         <div className="filter-options">
