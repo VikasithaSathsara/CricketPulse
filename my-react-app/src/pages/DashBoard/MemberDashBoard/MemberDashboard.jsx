@@ -108,7 +108,7 @@ const MemberDashboard = () => {
                 <GrFormPrevious size={30} cursor={"pointer"} />
               </div>
               {currentCourts.map((court) => (
-                <CourtCard key={court.id} court={court} />
+                <CourtCard key={court.courtId} court={court} />
               ))}
               {/* Next Arrow Icon */}
               <div

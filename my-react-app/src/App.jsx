@@ -24,6 +24,8 @@ import UserPage from "./pages/UserPage/UserPage";
 import CoachBooking from "./pages/CoachBooking/MemberCoachBooking/CoachBooking";
 import BookingPage_coach from "./pages/BookingPages/BookingPage_coach";
 import BookingPage_court from "./pages/BookingPages/BookingPage_court";
+import MemberCoachBookingDetails from "./pages/CoachBookingDetails/MemberCoachBookingDetails/MemberCoachBookingDetails";
+import MemberCourtBookingDetails from "./pages/CourtBookingDetails/MemberCourtBookingDetails/MemberCourtBookingDetails";
 
 function App() {
     const { isLoggedIn, role } = useContext(StoreContext);
@@ -122,6 +124,14 @@ function App() {
                             <Route
                                 path="/book-court"
                                 element={<BookingPage_court />}
+                            />
+                            <Route
+                                path="/member-coach-booking-details"
+                                element={<MemberCoachBookingDetails />}
+                            />
+                            <Route
+                                path="/member-court-booking-details"
+                                element={<MemberCourtBookingDetails />}
                             />
                         </Routes>
 

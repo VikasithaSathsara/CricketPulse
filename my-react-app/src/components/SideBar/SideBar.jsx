@@ -172,23 +172,15 @@ const SideBar = () => {
                                         </li>
 
                                         <li className="side-item">
-                                            <Link to="/court-bookings">
+                                            <Link to="/member-court-booking-details">
                                                 <MdAssignmentAdd size={20} />
-                                                <span>Book a Court</span>
+                                                <span>Court Bookings</span>
                                             </Link>
                                         </li>
-
                                         <li className="side-item">
-                                            <Link to="/coach-bookings">
-                                                <FaAddressBook size={20} />
-                                                <span>Book a Coach</span>
-                                            </Link>
-                                        </li>
-
-                                        <li className="side-item">
-                                            <Link to="/sessions">
+                                            <Link to="/member-coach-booking-details">
                                                 <MdSportsCricket size={20} />
-                                                <span>Sessions</span>
+                                                <span>Coach Booking</span>
                                             </Link>
                                         </li>
                                         <li className="side-item">
