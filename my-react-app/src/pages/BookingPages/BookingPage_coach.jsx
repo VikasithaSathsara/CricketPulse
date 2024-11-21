@@ -104,7 +104,7 @@ const BookingPage_coach = () => {
                 console.log("Booking response:", response.data);
                 setShowPopup(false);
                 setTimeout(() => {
-                    window.location.replace("/dashboard");
+                    window.location.replace("/member-coach-booking-details");
                 }, 1000);
                 setSelectedSlot(null);
             } catch (error) {

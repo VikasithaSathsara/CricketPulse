@@ -7,6 +7,7 @@ import axios from "axios";
 
 const MemberCoachBookingDetails = () => {
   const [bookings, setBookings] = useState([]);
+  const [filter, setFilter] = useState("ALL");
 
   useEffect(() => {
     axios
@@ -29,23 +30,27 @@ const MemberCoachBookingDetails = () => {
   };
 
   const todaySessions = bookings.filter((booking) => isToday(booking.date));
-  const otherSessions = bookings;
+  const otherSessions = bookings.filter((booking) => !isToday(booking.date));
 
   const getStatus = (date) => {
     const today = new Date();
     const sessionDate = new Date(date);
 
     if (sessionDate < today) {
-      return "Completed";
-    } else if (isToday(date)) {
-      return "Today";
+      return "COMPLETED";
     } else {
-      return "Upcoming";
+      return "UPCOMING";
     }
   };
 
+  const filteredBookings = bookings.filter((booking) => {
+    const status = getStatus(booking.date);
+    if (filter === "ALL") return true;
+    return status === filter;
+  });
+
   const tableHeaders = ["Session ID", "Coach", "Date", "Time", "Status"];
-  const tableBody = otherSessions.map((booking) => ({
+  const tableBody = filteredBookings.map((booking) => ({
     id: booking.id,
     coach: `${booking.coach.firstName} ${booking.coach.lastName}`,
     date: new Date(booking.date).toLocaleDateString(),
@@ -65,8 +70,13 @@ const MemberCoachBookingDetails = () => {
         )}
       </SectionContainer>
       <SectionContainer title="All Sessions">
-        {otherSessions.length === 0 ? (
-          <p>No other sessions available.</p>
+        <div className="filter-options">
+          <button onClick={() => setFilter("ALL")}>ALL</button>
+          <button onClick={() => setFilter("UPCOMING")}>UPCOMING</button>
+          <button onClick={() => setFilter("COMPLETED")}>COMPLETED</button>
+        </div>
+        {filteredBookings.length === 0 ? (
+          <p>No sessions available.</p>
         ) : (
           <Table headers={tableHeaders} body={tableBody} />
         )}
