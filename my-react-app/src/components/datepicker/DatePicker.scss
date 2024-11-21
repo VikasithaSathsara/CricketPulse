@@ -1,7 +1,7 @@
 @use '../../colors/colors.scss' as colors;
 
 .date-picker {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     gap:20px;
   }
 
@@ -15,8 +15,6 @@
     font-size: 16px;
     color:  colors.$font-color-gray;
   }
-  
-
 
   .date-container {
     background-color: rgb(255, 255, 255);

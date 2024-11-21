@@ -87,9 +87,7 @@ function CoachRegister() {
                 />
                 <div className="form-warp">
                     <form onSubmit={handleSubmit}>
-                        <h1 className="form-heading">
-                            Coach Registration Form
-                        </h1>
+                        <h1 className="form-heading">Coach Registration</h1>
 
                         <div className="form-input-box">
                             <input
@@ -113,17 +111,7 @@ function CoachRegister() {
                                 required
                             />
                         </div>
-                        <div className="form-input-box">
-                            <input
-                                className="form-input"
-                                type="date"
-                                name="dob"
-                                placeholder="Date of Birth"
-                                value={formData.dob}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+
                         <div className="form-input-box">
                             <input
                                 className="form-input"
@@ -135,6 +123,23 @@ function CoachRegister() {
                                 required
                             />
                         </div>
+
+                        <div className="form-input-box">
+                            <select
+                                id="type"
+                                className="form-input"
+                                name="coachType"
+                                value={formData.coachType}
+                                onChange={handleChange}
+                                required
+                            >
+                                <option value="">--Select Coach Type--</option>
+                                <option value="Type 1">Batting Coach</option>
+                                <option value="Type 2">Bowling Coach</option>
+                                <option value="Type 3">Fielding Coach</option>
+                            </select>
+                        </div>
+
                         <div className="form-input-box">
                             <input
                                 className="form-input"
@@ -168,17 +173,33 @@ function CoachRegister() {
                                 required
                             />
                         </div>
+                        <div className="file-input-box">
+                            <label className="pro-pic">
+                                Upload Profile Photo
+                            </label>
 
-                        <button type="submit" className="register">
-                            Register
-                        </button>
-                        <button
-                            type="button"
-                            className="cancel"
-                            onClick={() => navigate("/")}
-                        >
-                            Cancel
-                        </button>
+                            <input
+                                className="file-input"
+                                type="file"
+                                accept="image/*"
+                                placeholder="Date of Birth"
+                                value={formData.profilePic}
+                                onChange={handleChange}
+                                required
+                            />
+                        </div>
+                        <div className="reg-button">
+                            <button type="submit" className="register">
+                                Register
+                            </button>
+                            <button
+                                type="button"
+                                className="cancel"
+                                onClick={() => navigate("/")}
+                            >
+                                Cancel
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
