@@ -16,10 +16,9 @@ import MemberDashboard from "./pages/DashBoard/MemberDashBoard/MemberDashboard";
 import MemberSession from "./pages/Sessions/MemberSessions/MemberSession";
 import CoachSession from "./pages/Sessions/CoachSessions/CoachSession";
 import AdminSession from "./pages/Sessions/AdminSessions/AdminSession";
-import MemberProfile from "./pages/Profile/MemberProfile/MemberProfile";
+import Profile from "./pages/Profile/Profile";
 import CourtBooking from "./pages/CourtsBooking/MemberCourtBooking/CourtBooking";
 import AdminCourtBooking from "./pages/CourtsBooking/AdminCourtBooking/AdminCourtBooking";
-import CoachProfile from "./pages/Profile/CoachProfile/CoachProfile";
 import UserPage from "./pages/UserPage/UserPage";
 import CoachBooking from "./pages/CoachBooking/MemberCoachBooking/CoachBooking";
 import BookingPage_coach from "./pages/BookingPages/BookingPage_coach";
@@ -86,7 +85,7 @@ function App() {
                                 path="/sessions"
                                 element={<CoachSession />}
                             />
-                            <Route path="/profile" element={<CoachProfile />} />
+                            <Route path="/profile" element={<Profile />} />
                         </Routes>
                         {/* <Footer /> */}
                     </>
@@ -105,10 +104,7 @@ function App() {
                                 path="/sessions"
                                 element={<MemberSession />}
                             />
-                            <Route
-                                path="/profile"
-                                element={<MemberProfile />}
-                            />
+                            <Route path="/profile" element={<Profile />} />
                             <Route
                                 path="/court-bookings"
                                 element={<CourtBooking />}

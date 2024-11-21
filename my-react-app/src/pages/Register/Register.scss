@@ -13,7 +13,7 @@
     .form-warp {
         width: 600px;
         margin-left: 120px;
-        background-color:colors.$form-bgcolor;
+        background-color: colors.$form-bgcolor;
         border-radius: 20px;
         color: colors.$primary-font-color;
         padding: 20px 40px;
@@ -49,38 +49,68 @@
                 font-size: 17px;
             }
 
-            .form-input[type="date"] {
+            #type {
+                padding: 0 20px 0 15px;
                 font-size: 17px;
             }
-                
         }
 
-        .register {
-            width: 40%;
-            height: 45px;
-            background: rgb(254, 237, 0);
-            color: colors.$secondary-color;
-            outline: none;
-            border-radius: 40px;
-            cursor: pointer;
-            font-size: 17px;
-            font-weight: 700;
-            border: 2px solid colors.$secondary-color;
-          }
-
-          .cancel{
-            width: 40%;
-            height: 45px;
-            background: transparent;
+        .file-input-box {
+            display: flex;
+            flex-direction: column;
             color: colors.$primary-font-color;
-            outline: none;
-            border-radius: 40px;
-            cursor: pointer;
-            font-size: 17px;
-            font-weight: 700;
-            border: 2px solid colors.$primary-font-color;
-            margin-left: 85px;
+            margin-left: 15px;
 
-          }
+            .file-input[type="file"] {
+                font-size: 16px;
+            }
+            .file-input::-webkit-file-upload-button {
+                background-color: green;
+                color: colors.$primary-font-color;
+                padding: 6px;
+                margin-right: 20px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+            .pro-pic {
+                color: colors.$primary-font-color;
+                font-weight: 500;
+                font-size: 17px;
+                margin-bottom: 15px;
+            }
+        }
+        .reg-button {
+            margin-top: 45px;
+            margin-bottom: 10px;
+
+            .register {
+                width: 40%;
+                height: 45px;
+                background: rgb(254, 237, 0);
+                color: colors.$secondary-color;
+                outline: none;
+                border-radius: 40px;
+                cursor: pointer;
+                font-size: 17px;
+                font-weight: 700;
+                border: 2px solid colors.$secondary-color;
+            }
+
+            .cancel {
+                width: 40%;
+                height: 45px;
+                background: transparent;
+                color: colors.$primary-font-color;
+                outline: none;
+                border-radius: 40px;
+                cursor: pointer;
+                font-size: 17px;
+                font-weight: 700;
+                border: 2px solid colors.$primary-font-color;
+                margin-left: 85px;
+            }
+        }
     }
 }
