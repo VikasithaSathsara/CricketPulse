@@ -19,6 +19,7 @@ function CoachRegister() {
         password: "",
         confirmPassword: "",
         profilePic: null,
+        specialize: "",
     });
     const [loading, setLoading] = useState(false);
 
@@ -31,7 +32,7 @@ function CoachRegister() {
     };
 
     const uploadProfilePic = async (file) => {
-        const storageRef = ref(imageDb, `profilePics/${file.name}`);
+        const storageRef = ref(imageDb, `profilePics/coach/${file.name}`);
         await uploadBytes(storageRef, file);
         return await getDownloadURL(storageRef);
     };
@@ -59,6 +60,7 @@ function CoachRegister() {
                 gender: "Male", // You can add a gender input field if needed
                 dob: formData.dob,
                 profilePic: profilePicUrl,
+                specialize:formData.coachType,
             };
 
             const response = await axios.post(
@@ -154,9 +156,9 @@ function CoachRegister() {
                                     required
                                 >
                                     <option value="">--Select Coach Type--</option>
-                                    <option value="Type 1">Batting Coach</option>
-                                    <option value="Type 2">Bowling Coach</option>
-                                    <option value="Type 3">Fielding Coach</option>
+                                    <option value="Batting Coach">Batting Coach</option>
+                                    <option value="Bowling Coach">Bowling Coach</option>
+                                    <option value="Fielding Coach">Fielding Coach</option>
                                 </select>
                             </div>
 

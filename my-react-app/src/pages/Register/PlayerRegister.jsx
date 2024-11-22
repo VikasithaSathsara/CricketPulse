@@ -4,9 +4,12 @@ import "./Register.scss";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { imageDb } from "../../config/firebaseConfig"; // Adjust the import path as needed
 
 function PlayerRegister() {
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
@@ -16,37 +19,48 @@ function PlayerRegister() {
         address: "",
         email: "",
         dob: "",
+        profilePic: null,
     });
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, files } = e.target;
         setFormData({
             ...formData,
-            [name]: value,
+            [name]: files ? files[0] : value,
         });
+    };
+
+    const uploadProfilePic = async (file) => {
+        const storageRef = ref(imageDb, `profilePics/member/${file.name}`);
+        await uploadBytes(storageRef, file);
+        return await getDownloadURL(storageRef);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         if (formData.password !== formData.rePassword) {
             alert("Passwords do not match");
             return;
         }
 
-        const requestBody = {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            username: formData.email,
-            password: formData.password,
-            role: "MEMBER",
-            phoneNumber: "0760570695", // You can add a phone number input if needed
-            address: formData.address,
-            gender: "Male", // You can add a gender input if needed
-            dob: formData.dob,
-            profilePic: "profile-pic-url", // You can add a profile picture input if needed
-        };
 
         try {
+
+            const profilePicUrl = await uploadProfilePic(formData.profilePic);
+            const requestBody = {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                username: formData.email,
+                password: formData.password,
+                role: "MEMBER",
+                phoneNumber: "0760570695", 
+                address: formData.address,
+                gender: "Male", 
+                dob: formData.dob,
+                profilePic:profilePicUrl,
+            };
+
             const response = await fetch(
                 "http://localhost:8080/api/users/create-user",
                 {
@@ -69,6 +83,8 @@ function PlayerRegister() {
         } catch (error) {
             console.error("Error:", error);
             toast.error("Registration failed");
+        }finally {
+            setLoading(false);
         }
     };
 
@@ -89,7 +105,12 @@ function PlayerRegister() {
                     theme="colored"
                 />
                 <div className="form-warp">
-                    <form onSubmit={handleSubmit}>
+                {loading ? (
+                        <div className="loading-screen">
+                            <div className="loader"></div>
+                        </div>
+                    ) : (
+                        <form onSubmit={handleSubmit}>
                         <h1 className="form-heading">Player Registration</h1>
 
                         <div className="form-input-box">
@@ -166,14 +187,13 @@ function PlayerRegister() {
                             </label>
 
                             <input
-                                className="file-input"
-                                type="file"
-                                accept="image/*"
-                                placeholder="Date of Birth"
-                                value={formData.profilePic}
-                                onChange={handleChange}
-                                required
-                            />
+                                    className="file-input"
+                                    type="file"
+                                    accept="image/*"
+                                    name="profilePic"
+                                    onChange={handleChange}
+                                    required
+                                />
                         </div>
                         <div className="reg-button">
                             <button type="submit" className="register">
@@ -188,6 +208,8 @@ function PlayerRegister() {
                             </button>
                         </div>
                     </form>
+                    )}
+
                 </div>
             </div>
         </div>
