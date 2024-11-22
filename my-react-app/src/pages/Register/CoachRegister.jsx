@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import "./Register.scss";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
 import axios from "axios";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { imageDb } from "../../config/firebaseConfig"; // Adjust the import path as needed
 
 function CoachRegister() {
     const navigate = useNavigate();
@@ -17,14 +18,22 @@ function CoachRegister() {
         email: "",
         password: "",
         confirmPassword: "",
+        profilePic: null,
     });
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const { name, value, files } = e.target;
         setFormData({
             ...formData,
-            [name]: value,
+            [name]: files ? files[0] : value,
         });
+    };
+
+    const uploadProfilePic = async (file) => {
+        const storageRef = ref(imageDb, `profilePics/${file.name}`);
+        await uploadBytes(storageRef, file);
+        return await getDownloadURL(storageRef);
     };
 
     const handleSubmit = async (e) => {
@@ -34,20 +43,24 @@ function CoachRegister() {
             return;
         }
 
-        const requestBody = {
-            firstName: formData.firstName,
-            lastName: formData.lastName,
-            username: formData.email,
-            password: formData.password,
-            role: "COACH",
-            phoneNumber: "0760570665", // You can add a phone number input field if needed
-            address: formData.address,
-            gender: "Male", // You can add a gender input field if needed
-            dob: formData.dob,
-            profilePic: "profile-pic-url", // You can add a profile picture input field if needed
-        };
+        setLoading(true);
 
         try {
+            const profilePicUrl = await uploadProfilePic(formData.profilePic);
+
+            const requestBody = {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                username: formData.email,
+                password: formData.password,
+                role: "COACH",
+                phoneNumber: "0760570665", // You can add a phone number input field if needed
+                address: formData.address,
+                gender: "Male", // You can add a gender input field if needed
+                dob: formData.dob,
+                profilePic: profilePicUrl,
+            };
+
             const response = await axios.post(
                 "http://localhost:8080/api/users/create-user",
                 requestBody
@@ -61,6 +74,8 @@ function CoachRegister() {
         } catch (error) {
             console.error("There was an error registering the coach!", error);
             toast.error("Registration failed");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -86,121 +101,126 @@ function CoachRegister() {
                     theme="colored"
                 />
                 <div className="form-warp">
-                    <form onSubmit={handleSubmit}>
-                        <h1 className="form-heading">Coach Registration</h1>
+                    {loading ? (
+                        <div className="loading-screen">
+                            <div className="loader"></div>
+                        </div>
+                    ) : (
+                        <form onSubmit={handleSubmit}>
+                            <h1 className="form-heading">Coach Registration</h1>
 
-                        <div className="form-input-box">
-                            <input
-                                className="form-input"
-                                type="text"
-                                name="firstName"
-                                placeholder="First Name"
-                                value={formData.firstName}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className="form-input-box">
-                            <input
-                                className="form-input"
-                                type="text"
-                                name="lastName"
-                                placeholder="Last Name"
-                                value={formData.lastName}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="form-input-box">
+                                <input
+                                    className="form-input"
+                                    type="text"
+                                    name="firstName"
+                                    placeholder="First Name"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-input-box">
+                                <input
+                                    className="form-input"
+                                    type="text"
+                                    name="lastName"
+                                    placeholder="Last Name"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div className="form-input-box">
-                            <input
-                                className="form-input"
-                                type="text"
-                                name="address"
-                                placeholder="Address"
-                                value={formData.address}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="form-input-box">
+                                <input
+                                    className="form-input"
+                                    type="text"
+                                    name="address"
+                                    placeholder="Address"
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div className="form-input-box">
-                            <select
-                                id="type"
-                                className="form-input"
-                                name="coachType"
-                                value={formData.coachType}
-                                onChange={handleChange}
-                                required
-                            >
-                                <option value="">--Select Coach Type--</option>
-                                <option value="Type 1">Batting Coach</option>
-                                <option value="Type 2">Bowling Coach</option>
-                                <option value="Type 3">Fielding Coach</option>
-                            </select>
-                        </div>
+                            <div className="form-input-box">
+                                <select
+                                    id="type"
+                                    className="form-input"
+                                    name="coachType"
+                                    value={formData.coachType}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    <option value="">--Select Coach Type--</option>
+                                    <option value="Type 1">Batting Coach</option>
+                                    <option value="Type 2">Bowling Coach</option>
+                                    <option value="Type 3">Fielding Coach</option>
+                                </select>
+                            </div>
 
-                        <div className="form-input-box">
-                            <input
-                                className="form-input"
-                                type="email"
-                                name="email"
-                                placeholder="Email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className="form-input-box">
-                            <input
-                                className="form-input"
-                                type="password"
-                                name="password"
-                                placeholder="Password"
-                                value={formData.password}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className="form-input-box">
-                            <input
-                                className="form-input"
-                                type="password"
-                                name="confirmPassword"
-                                placeholder="Re-enter Password"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className="file-input-box">
-                            <label className="pro-pic">
-                                Upload Profile Photo
-                            </label>
+                            <div className="form-input-box">
+                                <input
+                                    className="form-input"
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-input-box">
+                                <input
+                                    className="form-input"
+                                    type="password"
+                                    name="password"
+                                    placeholder="Password"
+                                    value={formData.password}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="form-input-box">
+                                <input
+                                    className="form-input"
+                                    type="password"
+                                    name="confirmPassword"
+                                    placeholder="Re-enter Password"
+                                    value={formData.confirmPassword}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="file-input-box">
+                                <label className="pro-pic">
+                                    Upload Profile Photo
+                                </label>
 
-                            <input
-                                className="file-input"
-                                type="file"
-                                accept="image/*"
-                                placeholder="Date of Birth"
-                                value={formData.profilePic}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
-                        <div className="reg-button">
-                            <button type="submit" className="register">
-                                Register
-                            </button>
-                            <button
-                                type="button"
-                                className="cancel"
-                                onClick={() => navigate("/")}
-                            >
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
+                                <input
+                                    className="file-input"
+                                    type="file"
+                                    accept="image/*"
+                                    name="profilePic"
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="reg-button">
+                                <button type="submit" className="register">
+                                    Register
+                                </button>
+                                <button
+                                    type="button"
+                                    className="cancel"
+                                    onClick={() => navigate("/")}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        </form>
+                    )}
                 </div>
             </div>
         </div>

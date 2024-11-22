@@ -21,7 +21,7 @@ function LoginPage() {
         setRole,
         setUsername,
         setLastName,
-        setProfileImage,
+        setProfilePic,
     } = useContext(StoreContext);
 
     const handleSubmit = async (event) => {
@@ -54,7 +54,7 @@ function LoginPage() {
                 setLastName(lastName);
                 setUsername(username);
                 setRole(role);
-                setProfileImage(response.data.profileImage);
+                setProfilePic(response.data.profilePic);
                 setIsLoggedIn(true);
                 navigate("/dashboard");
             } else {

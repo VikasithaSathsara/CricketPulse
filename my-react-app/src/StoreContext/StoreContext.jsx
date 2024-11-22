@@ -24,8 +24,8 @@ const StoreContextProvider = (props) => {
     );
     const [role, setRole] = useState(() => localStorage.getItem("role") || "");
 
-    const [profileImage, setProfileImage] = useState(
-        () => localStorage.getItem("profileImage") || ""
+    const [profilePic, setProfilePic] = useState(
+        () => localStorage.getItem("profilePic") || ""
     );
 
     const [selectedCoach, setSelectedCoach] = useState(null);
@@ -53,11 +53,11 @@ const StoreContextProvider = (props) => {
         localStorage.setItem("firstName", firstName);
         localStorage.setItem("lastName", lastName);
         localStorage.setItem("role", role);
-        localStorage.setItem("profileImage", profileImage);
+        localStorage.setItem("profilePic", profilePic);
         localStorage.setItem("userId", userId);
         localStorage.setItem("selectedCoach", JSON.stringify(selectedCoach));
 
-    }, [isLoggedIn,username, firstName, lastName, role,profileImage, userId, selectedCoach, selectedCourt, selectedSlots]);
+    }, [isLoggedIn,username, firstName, lastName, role,profilePic, userId, selectedCoach, selectedCourt, selectedSlots]);
 
 
     const handleLogout = () => {
@@ -67,7 +67,7 @@ const StoreContextProvider = (props) => {
         setFirstName("");
         setLastName("");
         setRole("");
-        setProfileImage("");
+        setProfilePic("");
         updateSelectedCoach("")
         updateSelectedCourt("")
         setSelectedSlots([])
@@ -79,7 +79,7 @@ const StoreContextProvider = (props) => {
         isLoggedIn,
         userId,
         username,
-        profileImage,
+        profilePic,
         selectedCoach,
         selectedCourt,
         selectedSlots,  
@@ -93,7 +93,7 @@ const StoreContextProvider = (props) => {
         setLastName,
         setRole,
         handleLogout,
-        setProfileImage,
+        setProfilePic,
         updateSelectedCoach,
         updateSelectedCourt,
         setSelectedSlots,

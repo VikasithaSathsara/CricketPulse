@@ -33,7 +33,7 @@ const SideBar = () => {
         lastName,
         role,
         username,
-        profileImage,
+        profilePic,
     } = useContext(StoreContext);
 
     const [sidebar, setSidebar] = useState(false);
@@ -116,7 +116,7 @@ const SideBar = () => {
                                 <FaUser />
                                 {showProfileCard && (
                                     <UserProfileCard
-                                        profile_icon={profileImage}
+                                        profile_icon={profilePic}
                                         name={`${firstName} ${lastName}`}
                                         role={role}
                                         onClose={() =>
