@@ -1,20 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext } from "react";
 import "./MemberCoachBookingDetailsStyles.scss";
 import CoachBookingCard from "../../../components/BookingCard/CoachBookingCard/CoachBookingCard";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import Table from "../../../components/Table/Table";
 import axios from "axios";
+import { StoreContext } from "../../../StoreContext/StoreContext";
 
 const MemberCoachBookingDetails = () => {
   const [bookings, setBookings] = useState([]);
   const [filter, setFilter] = useState("ALL");
+  const { userId } = useContext(StoreContext);
+
 
   useEffect(() => {
+ 
+
     axios
-      .get("http://localhost:8080/api/coach-bookings/get_all_coach_bookings")
+      .get(`http://localhost:8080/api/coach-bookings/get_coach_bookings_by_member/${userId}`)
       .then((response) => {
-        setBookings(response.data);
-        console.log("Booking Data :", response.data);
+      setBookings(response.data);
+      console.log("Booking Data :", response.data);
       })
       .catch((error) => console.error("Error fetching data:", error));
   }, []);

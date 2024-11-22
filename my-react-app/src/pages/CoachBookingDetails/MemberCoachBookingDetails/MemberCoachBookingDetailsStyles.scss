@@ -41,11 +41,11 @@
       transition: background-color 0.3s;
 
       &:hover {
-        background-color: darken(sysColors.$primary-color, 10%);
+        background-color:   sysColors.$secondary-color;
       }
 
       &.active {
-        background-color: darken(sysColors.$primary-color, 20%);
+        background-color: sysColors.$secondary-color;
       }
     }
   }
