@@ -24,6 +24,7 @@ const DatePicker = ({ selectedDate, setSelectedDate }) => {
         id="datePicker"
         value={selectedDate.toISOString().substr(0, 10)} 
         onChange={handleDateChange}
+        min={new Date().toISOString().split('T')[0]}
       />
     </div>
   );
