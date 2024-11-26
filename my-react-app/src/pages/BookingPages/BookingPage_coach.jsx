@@ -170,6 +170,8 @@ const BookingPage_coach = () => {
                             Mobile: {selectedCoach.phoneNumber}
                         </p>
                         <p className="booking-specialize">City: Colombo</p>
+
+                        
                     </div>
                 </div>
             )}
