@@ -151,7 +151,7 @@ const SideBar = () => {
                                         <li className="side-item">
                                             <Link to="/sessions">
                                                 <PiCricketFill size={20} />
-                                                <span>Sessions</span>
+                                                <span> All Sessions</span>
                                             </Link>
                                         </li>
                                         <li className="side-item">
