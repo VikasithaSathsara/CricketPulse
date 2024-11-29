@@ -41,6 +41,14 @@
       font-weight: bold;
       color: sysColors.$primary-color;
       margin-bottom: 5px;
+
+      span{
+        margin: 0;
+        font-size: 1rem;
+        color: #343f47;
+        font-weight: 500;
+
+      }
     }
 
     .coach_booking-date,

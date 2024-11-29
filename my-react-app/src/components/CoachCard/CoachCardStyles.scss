@@ -7,7 +7,6 @@
   text-align: center;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 40px;
-  // margin-top: 20px;
   width: 280px;
   height: 355px;
 
@@ -16,7 +15,7 @@
     border: solid 2px #e0e0e0;
     padding: 10px;
   }
-}
+
 
 .coach-img {
   width: 100%;
@@ -39,32 +38,39 @@
   margin-bottom: 13px;
 }
 
-// // Styles for the button
-// .appointment-button {
-//   background-color: colors.$secondary-color;
-//   color: white;
-//   border: none;
-//   border-radius: 7px;
-//   padding: 10px 10px;
-//   font-size: 0.9rem;
-//   font-weight: 400;
-//   cursor: pointer;
-//   display: flex;
-//   align-items: center;
-//   justify-content: space-evenly;
-//   transition: background-color 0.3s;
-//   margin-left: 20px;
-//   margin-right: 20px;
-//   margin-top: 2px;
-//   &:hover {
-//    // background-color:colors.$secondary-color-hover;
-//    background-color: rgb(242, 255, 0);
-//     color: #000000;
-//     border: solid 1px #000000;
-//   }
-// }
-
-// .appointment-icon {
-//   margin-right: 5px; 
+// Styles for the button
+.button-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 6px;
+  .appointment-button {
+    background-color: colors.$secondary-color;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+    font-weight: 400;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    margin-top: 2px;
+    &:hover 
+  {
+     // background-color:colors.$secondary-color-hover;
+     background-color: rgb(242, 255, 0);
+      color: #000000;
+      border: solid 1px #000000;
+    }
+  }
   
-// }
+  .appointment-icon {
+    margin-right: 5px; 
+    
+  }
+}
+
+
+}

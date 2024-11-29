@@ -20,7 +20,7 @@ const CourtCard = ({ court }) => {
                 alt={court.courtImg}
                 className="court-img"
             />
-            <p className="court-id">Court {court.courtId}</p>
+            {/* <p className="court-id">Court {court.courtId}</p> */}
             <h4 className="court-name">{court.courtName}</h4>
             <p>{court.courtType}</p>
             <div className="button-container">

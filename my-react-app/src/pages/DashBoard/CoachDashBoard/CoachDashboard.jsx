@@ -31,34 +31,29 @@ ChartJS.register(
 );
 
 const CoachDashboard = () => {
-    const playerPerformanceData = {
-        labels: ["Player 1", "Player 2", "Player 3", "Player 4", "Player 5"],
+    const revenueData = {
+        labels: [
+            "January", "February", "March", "April", "May", "June", 
+            "July", "August", "September", "October", "November", "December"
+        ],
         datasets: [
             {
-                label: "Runs Scored",
-                data: [50, 75, 100, 125, 150],
-                backgroundColor: "rgba(75, 192, 192, 0.6)",
-            },
-            {
-                label: "Wickets Taken",
-                data: [2, 3, 5, 1, 4],
-                backgroundColor: "rgba(153, 102, 255, 0.6)",
+                label: "Revenue",
+                data: [1200, 1500, 1100, 1800, 1700, 1600, 1900, 2000, 2100, 2200, 2300, 2400],
+                backgroundColor: "rgba(54, 162, 235, 0.6)",
             },
         ],
     };
 
     const trainingSessionsData = {
         labels: [
-            "Session 1",
-            "Session 2",
-            "Session 3",
-            "Session 4",
-            "Session 5",
+            "January", "February", "March", "April", "May", "June", 
+            "July", "August", "September", "October", "November", "December"
         ],
         datasets: [
             {
-                label: "Attendance",
-                data: [20, 18, 22, 19, 21],
+                label: "Training Sessions",
+                data: [5, 4, 6, 5, 7, 8, 6, 7, 5, 6, 4, 5],
                 borderColor: "rgba(255, 99, 132, 1)",
                 backgroundColor: "rgba(255, 159, 64, 0.6)",
                 tension: 0.4, // Smooth curve
@@ -66,66 +61,7 @@ const CoachDashboard = () => {
         ],
     };
 
-    const performanceAnalysisData = {
-        labels: ["Batting", "Bowling", "Fielding", "Fitness"],
-        datasets: [
-            {
-                label: "Performance",
-                data: [80, 70, 90, 85],
-                backgroundColor: [
-                    "rgba(255, 99, 132, 0.6)",
-                    "rgba(54, 162, 235, 0.6)",
-                    "rgba(255, 206, 86, 0.6)",
-                    "rgba(75, 192, 192, 0.6)",
-                ],
-                borderColor: "rgba(0, 0, 0, 0.1)", // Optional border color
-                borderWidth: 1,
-            },
-        ],
-    };
 
-    const [bookings, setBookings] = useState([]);
-    const [filter, setFilter] = useState("ALL");
-    const { userId } = useContext(StoreContext);
-
-    const isToday = (date) => {
-        const today = new Date();
-        const sessionDate = new Date(date);
-        return (
-            sessionDate.getDate() === today.getDate() &&
-            sessionDate.getMonth() === today.getMonth() &&
-            sessionDate.getFullYear() === today.getFullYear()
-        );
-    };
-
-    const todaySessions = bookings.filter((booking) => isToday(booking.date));
-    const otherSessions = bookings.filter((booking) => !isToday(booking.date));
-
-    const getStatus = (date) => {
-        const today = new Date();
-        const sessionDate = new Date(date);
-
-        if (sessionDate < today) {
-            return "COMPLETED";
-        } else {
-            return "UPCOMING";
-        }
-    };
-
-    const filteredBookings = bookings.filter((booking) => {
-        const status = getStatus(booking.date);
-        if (filter === "ALL") return true;
-        return status === filter;
-    });
-
-    const tableHeaders = ["Session ID", "Coach", "Date", "Time", "Status"];
-    const tableBody = filteredBookings.map((booking) => ({
-        id: booking.id,
-        coach: `${booking.coach.firstName} ${booking.coach.lastName}`,
-        date: new Date(booking.date).toLocaleDateString(),
-        time: `${booking.startTime} - ${booking.endTime}`,
-        status: getStatus(booking.date),
-    }));
     return (
         <div className="coach-dashboard-container">
             <SectionContainer title="Coach Dashboard">
@@ -136,28 +72,14 @@ const CoachDashboard = () => {
                             <Line data={trainingSessionsData} />
                         </section>
                         <section className="dashboard-section">
-                            <h2>Player Performance</h2>
-                            <Bar data={playerPerformanceData} />
+                            <h2>Monthly Income</h2>
+                            <Bar data={revenueData} />
                         </section>
                         {/* <section className="dashboard-section">
                             <h2>Performance Analysis</h2>
                             <Pie data={performanceAnalysisData} />
                         </section> */}
                     </div>
-                </div>
-            </SectionContainer>
-            <SectionContainer title="Today's Sessions">
-                <div className="today-sesstions">
-                    {todaySessions.length === 0 ? (
-                        <p>No sessions for today.</p>
-                    ) : (
-                        todaySessions.map((booking) => (
-                            <CoachBookingCard
-                                key={booking.id}
-                                coach_booking={booking}
-                            />
-                        ))
-                    )}
                 </div>
             </SectionContainer>
         </div>

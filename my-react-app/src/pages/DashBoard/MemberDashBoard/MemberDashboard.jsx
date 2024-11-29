@@ -8,11 +8,11 @@ import CourtCard from "../../../components/CourtCard/CourtCard";
 const MemberDashboard = () => {
   const [featuredCoaches, setFeaturedCoaches] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const coachesPerPage = 4;
+  const coachesPerPage = 3;
 
   const [featuredCourts, setFeaturedCourts] = useState([]);
   const [currentCourtIndex, setCurrentCourtIndex] = useState(0);
-  const courtsPerPage = 4;
+  const courtsPerPage = 3;
 
   useEffect(() => {
     fetch("http://localhost:8080/api/users/get-all-coaches")
@@ -75,7 +75,7 @@ const MemberDashboard = () => {
                   currentIndex === 0 ? "disabled" : ""
                 }`}
               >
-                <GrFormPrevious size={30} cursor={"pointer"} />
+                <GrFormPrevious size={30} cursor={"pointer"} color="white"  />
               </div>
               {currentCoaches.map((coach) => (
                 <CoachCard key={coach.id} coach={coach} />
@@ -89,7 +89,7 @@ const MemberDashboard = () => {
                     : ""
                 }`}
               >
-                <GrFormNext size={30} cursor={"pointer"} />
+                <GrFormNext size={30} cursor={"pointer"} color="white" />
               </div>
             </div>
           </SectionContainer>
@@ -105,7 +105,7 @@ const MemberDashboard = () => {
                   currentIndex === 0 ? "disabled" : ""
                 }`}
               >
-                <GrFormPrevious size={30} cursor={"pointer"} />
+                <GrFormPrevious size={30} cursor={"pointer"} color="white" />
               </div>
               {currentCourts.map((court) => (
                 <CourtCard key={court.courtId} court={court} />
@@ -119,7 +119,7 @@ const MemberDashboard = () => {
                     : ""
                 }`}
               >
-                <GrFormNext size={30} cursor={"pointer"} />
+                <GrFormNext size={30} cursor={"pointer"} color="white"  />
               </div>
             </div>
           </SectionContainer>

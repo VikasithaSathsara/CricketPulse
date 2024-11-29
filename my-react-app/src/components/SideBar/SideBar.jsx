@@ -180,7 +180,7 @@ const SideBar = () => {
                                         <li className="side-item">
                                             <Link to="/member-coach-booking-details">
                                                 <MdSportsCricket size={20} />
-                                                <span>Coach Booking</span>
+                                                <span>Coach Bookings</span>
                                             </Link>
                                         </li>
                                         <li className="side-item">

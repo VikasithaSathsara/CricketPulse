@@ -27,9 +27,9 @@ const CoachBookingCard = ({ coach_booking }) => {
           )}
         </div>
         <div className="details">
-          <h4 className="coach-name">
-            {userRole === 'MEMBER' ? 'Coach' : 'Member'} : {coach_booking[userRole === 'MEMBER' ? 'coach' : 'member'].firstName} {coach_booking[userRole === 'MEMBER' ? 'coach' : 'member'].lastName}
-          </h4>
+          <p className="coach-name">
+          <span>{userRole === 'MEMBER' ? 'Coach' : 'Member'} : </span> {coach_booking[userRole === 'MEMBER' ? 'coach' : 'member'].firstName} {coach_booking[userRole === 'MEMBER' ? 'coach' : 'member'].lastName}
+          </p>
           <p className="coach_booking-date">Date : {coach_booking.date}</p>
           <p className="coach_booking-time">Time : {coach_booking.startTime} : {coach_booking.endTime}</p>
         </div>
