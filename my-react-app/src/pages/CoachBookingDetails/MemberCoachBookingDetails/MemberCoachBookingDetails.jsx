@@ -85,6 +85,7 @@ const MemberCoachBookingDetails = () => {
       <SectionContainer title="All Sessions">
         <div className="filter-options">
           <button onClick={() => setFilter("ALL")}>ALL</button>
+          <button onClick={() => setFilter("TODAY")}>TODAY</button>
           <button onClick={() => setFilter("UPCOMING")}>UPCOMING</button>
           <button onClick={() => setFilter("COMPLETED")}>COMPLETED</button>
         </div>
