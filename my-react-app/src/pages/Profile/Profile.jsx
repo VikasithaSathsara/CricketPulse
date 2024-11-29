@@ -32,7 +32,7 @@ const Profile = () => {
 
     return (
         <div className="profile-page">
-            <SectionContainer>
+            <SectionContainer title="Profile">
                 <div className="profile-section">
                     <div className="left-container">
                         <div className="profile-picture-card">

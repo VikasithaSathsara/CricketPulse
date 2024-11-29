@@ -25,7 +25,7 @@
 }
 .card{
   background-color: rgb(47, 24, 123);
-  width: 370px;
+  width: 350px;
   height: 160px;
   border-radius: 10px;
   text-align: center;
@@ -43,7 +43,7 @@ h2{
 
 .charts {
   display: flex;
-  flex-wrap: wrap;
+  //flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
