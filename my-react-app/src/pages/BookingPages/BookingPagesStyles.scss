@@ -20,7 +20,7 @@
   }
 
   .booking-container {
-    width: 45%;
+    width: 50%;
     display: flex;
     align-items: flex-start;
     margin-top: 1rem;
@@ -46,19 +46,39 @@
       flex-direction: column;
       align-items: flex-start;
       margin-left: 3rem;
+      margin-top: 2rem ;
 
       .booking-name {
-        font-size: 1.7rem;
-        margin: 25px 0;
+        font-size: 1.5rem;
+        margin: 10px 0;
       }
       // .coach-name {
       //   font-size: 2rem;
       // }
 
       .booking-specialize {
-        color: #000000;
-        font-weight: 500;
+        color: #292828;
+        font-weight: bold;
         font-size: 1.2rem;
+        margin-bottom: 6px;
+      }
+
+      .booking-email {
+        color: #292828;
+        font-weight: 400;
+        font-size: 1.1rem;
+        margin-bottom: 6px;
+      }
+      .booking-contact {
+        color: #292828;
+        font-weight: 400;
+        font-size: 1.1rem;
+        margin-bottom: 6px;
+      }
+      .booking-city{
+        color: #292828;
+        font-weight: 400;
+        font-size: 1.1rem;
         margin-bottom: 6px;
       }
     }

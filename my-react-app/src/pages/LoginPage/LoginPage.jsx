@@ -91,7 +91,7 @@ function LoginPage() {
                         <div className="input-box">
                             <input
                                 type="email"
-                                placeholder="Enter Email"
+                                placeholder="Username"
                                 className="form-control"
                                 id="exampleInputEmail1"
                                 onChange={(event) =>
@@ -106,7 +106,7 @@ function LoginPage() {
                         <div className="input-box">
                             <input
                                 type="password"
-                                placeholder="Enter Password"
+                                placeholder="Password"
                                 className="form-control"
                                 id="exampleInputPassword1"
                                 onChange={(event) =>

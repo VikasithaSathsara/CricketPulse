@@ -21,6 +21,9 @@
     .header-container {
       display: flex;
       justify-content: space-between;
+      h2{
+        color: rgb(51, 50, 50);
+      }
 
       .close-popup {
         background: red;

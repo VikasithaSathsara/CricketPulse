@@ -163,15 +163,13 @@ const BookingPage_coach = () => {
                         <p className="booking-specialize">
                             {selectedCoach.specialize}
                         </p>
-                        <p className="booking-specialize">
+                        <p className="booking-email">
                             Email: {selectedCoach.user.username}
                         </p>
-                        <p className="booking-specialize">
+                        <p className="booking-contact">
                             Mobile: {selectedCoach.phoneNumber}
                         </p>
-                        <p className="booking-specialize">City: Colombo</p>
-
-                        
+                        <p className="booking-city">City: Colombo</p>
                     </div>
                 </div>
             )}
