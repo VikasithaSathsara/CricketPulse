@@ -11,10 +11,10 @@ const CourtBookingCard = ({ court_booking }) => {
             <div className="client_coach_booking_card" key={court_booking.id}>
                 <div className="profile-img">
                     {console.log("coach booking:", court_booking.id)}
-                    {court_booking.court.profilePic && (
+                    {court_booking.court.courtImg && (
                         <img
-                            src={court_booking.court.profilePic}
-                            alt={`${court_booking.court.profilePic}`}
+                            src={court_booking.court.courtImg}
+                            alt={`${court_booking.court.courtImg}`}
                         />
                     )}
                     {/* <img
@@ -24,8 +24,7 @@ const CourtBookingCard = ({ court_booking }) => {
                 </div>
                 <div className="details">
                     <h4 className="coach-name">
-                        Court : {court_booking.court.firstName}{" "}
-                        {court_booking.court.lastName}
+                        Court : {court_booking.court.courtName}{" "}
                     </h4>
                     <p className="coach_booking-date">
                         Date : {court_booking.date}

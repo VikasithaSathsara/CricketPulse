@@ -87,16 +87,16 @@ const AdminDashBoard = () => {
             <SectionContainer title="Admin Dashboard">
                 <div className="card-container">
                     <div className="card">
-                        <h2>Total number of Players</h2>
+                        <h2>Total Players</h2>
                         <h2>100</h2>
                     </div>
                     <div className="card">
-                        <h2>Total number of Coaches</h2>
+                        <h2>Total Coaches</h2>
                         <h2>100</h2>
                     </div>
                     <div className="card">
-                        <h2>Total number of Courts</h2>
-                        <h2>100</h2>
+                        <h2>Total Courts</h2>
+                        <h2>6</h2>
                     </div>
                 </div>
                 <div className="dashboard-container">

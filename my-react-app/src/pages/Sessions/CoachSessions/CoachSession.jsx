@@ -38,18 +38,20 @@ const CoachSession = () => {
 
   const getStatus = (date) => {
     const today = new Date();
-    const sessionDate = new Date(date);
+    const bookingDate = new Date(date);
 
-    if (sessionDate < today) {
-      if(    sessionDate.getDate() === today.getDate() &&
-      sessionDate.getMonth() === today.getMonth() &&
-      sessionDate.getFullYear() === today.getFullYear()){
+    if (bookingDate >= today) {
+      if (
+        bookingDate.getDate() === today.getDate() &&
+        bookingDate.getMonth() === today.getMonth() &&
+        bookingDate.getFullYear() === today.getFullYear()
+      ) {
         return "TODAY";
-      }else{
-        return "COMPLETED";
+      } else {
+        return "UPCOMING";
       }
     } else {
-      return "UPCOMING";
+      return "COMPLETED";
     }
   };
 
