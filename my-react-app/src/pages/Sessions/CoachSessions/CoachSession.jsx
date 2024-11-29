@@ -51,6 +51,20 @@ const CoachSession = () => {
     return (
         <>
             <div className="coach-sessions-container">
+                <SectionContainer title="Today's sessions">
+                    <div className="today-sesstions">
+                        {todaySessions.length === 0 ? (
+                            <p>No sessions for today.</p>
+                        ) : (
+                            todaySessions.map((booking) => (
+                                <CoachBookingCard
+                                    key={booking.id}
+                                    coach_booking={booking}
+                                />
+                            ))
+                        )}
+                    </div>
+                </SectionContainer>
                 <SectionContainer title="All Sessions">
                     <div className="filter-options">
                         <button onClick={() => setFilter("ALL")}>ALL</button>

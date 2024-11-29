@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Bar, Line, Pie } from "react-chartjs-2";
 import {
     Chart as ChartJS,
@@ -14,6 +14,8 @@ import {
 } from "chart.js";
 import "./CoachDashboardStyles.scss";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
+import Table from "../../../components/Table/Table";
+import { StoreContext } from "../../../StoreContext/StoreContext";
 
 // Register necessary Chart.js components
 ChartJS.register(
@@ -82,6 +84,48 @@ const CoachDashboard = () => {
         ],
     };
 
+    const [bookings, setBookings] = useState([]);
+    const [filter, setFilter] = useState("ALL");
+    const { userId } = useContext(StoreContext);
+
+    const isToday = (date) => {
+        const today = new Date();
+        const sessionDate = new Date(date);
+        return (
+            sessionDate.getDate() === today.getDate() &&
+            sessionDate.getMonth() === today.getMonth() &&
+            sessionDate.getFullYear() === today.getFullYear()
+        );
+    };
+
+    const todaySessions = bookings.filter((booking) => isToday(booking.date));
+    const otherSessions = bookings.filter((booking) => !isToday(booking.date));
+
+    const getStatus = (date) => {
+        const today = new Date();
+        const sessionDate = new Date(date);
+
+        if (sessionDate < today) {
+            return "COMPLETED";
+        } else {
+            return "UPCOMING";
+        }
+    };
+
+    const filteredBookings = bookings.filter((booking) => {
+        const status = getStatus(booking.date);
+        if (filter === "ALL") return true;
+        return status === filter;
+    });
+
+    const tableHeaders = ["Session ID", "Coach", "Date", "Time", "Status"];
+    const tableBody = filteredBookings.map((booking) => ({
+        id: booking.id,
+        coach: `${booking.coach.firstName} ${booking.coach.lastName}`,
+        date: new Date(booking.date).toLocaleDateString(),
+        time: `${booking.startTime} - ${booking.endTime}`,
+        status: getStatus(booking.date),
+    }));
     return (
         <div className="coach-dashboard-container">
             <SectionContainer title="Coach Dashboard">
@@ -103,7 +147,18 @@ const CoachDashboard = () => {
                 </div>
             </SectionContainer>
             <SectionContainer title="Today's Sessions">
-                <div className="today-sesstions">No sessions</div>
+                <div className="today-sesstions">
+                    {todaySessions.length === 0 ? (
+                        <p>No sessions for today.</p>
+                    ) : (
+                        todaySessions.map((booking) => (
+                            <CoachBookingCard
+                                key={booking.id}
+                                coach_booking={booking}
+                            />
+                        ))
+                    )}
+                </div>
             </SectionContainer>
         </div>
     );

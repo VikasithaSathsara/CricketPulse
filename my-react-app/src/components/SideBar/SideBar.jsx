@@ -203,15 +203,15 @@ const SideBar = () => {
                                         <li className="side-item">
                                             <Link to="/sessions">
                                                 <PiCricketFill size={20} />
-                                                <span> Sessions</span>
+                                                <span> All Bookings</span>
                                             </Link>
                                         </li>
-                                        <li className="side-item">
+                                        {/* <li className="side-item">
                                             <Link to="/admin-court-booking">
                                                 <FaAddressBook />
                                                 <span>Bookigs</span>
                                             </Link>
-                                        </li>
+                                        </li> */}
                                         <li className="side-item">
                                             <Link to="/users">
                                                 <FaUsers />
