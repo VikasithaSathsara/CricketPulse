@@ -42,7 +42,13 @@ const MemberCoachBookingDetails = () => {
     const sessionDate = new Date(date);
 
     if (sessionDate < today) {
-      return "COMPLETED";
+      if(    sessionDate.getDate() === today.getDate() &&
+      sessionDate.getMonth() === today.getMonth() &&
+      sessionDate.getFullYear() === today.getFullYear()){
+        return "TODAY";
+      }else{
+        return "COMPLETED";
+      }
     } else {
       return "UPCOMING";
     }
