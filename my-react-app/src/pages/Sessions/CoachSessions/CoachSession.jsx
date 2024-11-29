@@ -55,59 +55,53 @@ const CoachSession = () => {
     }
   };
 
-
   const filteredBookings = bookings.filter((booking) => {
     const status = getStatus(booking.date);
     if (filter === "ALL") return true;
     return status === filter;
   });
 
-    const tableHeaders = ["Session ID", "Member", "Date", "Time", "Status"];
-    const tableBody = filteredBookings.map((booking) => ({
-        id: booking.id,
-        coach: `${booking.member.firstName} ${booking.member.lastName}`,
-        date: new Date(booking.date).toLocaleDateString(),
-        time: `${booking.startTime} - ${booking.endTime}`,
-        status: getStatus(booking.date),
-    }));
+  const tableHeaders = ["Session ID", "Member", "Date", "Time", "Status"];
+  const tableBody = filteredBookings.map((booking) => ({
+    id: booking.id,
+    coach: `${booking.member.firstName} ${booking.member.lastName}`,
+    date: new Date(booking.date).toLocaleDateString(),
+    time: `${booking.startTime} - ${booking.endTime}`,
+    status: getStatus(booking.date),
+  }));
 
-    return (
-        <>
-            <div className="coach-sessions-container">
-                <SectionContainer title="Today's sessions">
-                    <div className="today-sesstions">
-                        {todaySessions.length === 0 ? (
-                            <p>No sessions for today.</p>
-                        ) : (
-                            todaySessions.map((booking) => (
-                                <CoachBookingCard
-                                    key={booking.id}
-                                    coach_booking={booking}
-                                />
-                            ))
-                        )}
-                    </div>
-                </SectionContainer>
-                <SectionContainer title="All Sessions">
-                    <div className="filter-options">
-                        <button onClick={() => setFilter("ALL")}>ALL</button>
-                        <button onClick={() => setFilter("TODAY")}>TODAY</button>
-                        <button onClick={() => setFilter("UPCOMING")}>
-                            UPCOMING
-                        </button>
-                        <button onClick={() => setFilter("COMPLETED")}>
-                            COMPLETED
-                        </button>
-                    </div>
-                    {filteredBookings.length === 0 ? (
-                        <p>No sessions available.</p>
-                    ) : (
-                        <Table headers={tableHeaders} body={tableBody} />
-                    )}
-                </SectionContainer>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <div className="coach-sessions-container">
+        <SectionContainer title="Today's sessions">
+          <div className="today-sesstions">
+            {todaySessions.length === 0 ? (
+              <div className="no-data-notice">
+                No traning sessions for today.
+              </div>
+            ) : (
+              todaySessions.map((booking) => (
+                <CoachBookingCard key={booking.id} coach_booking={booking} />
+              ))
+            )}
+          </div>
+        </SectionContainer>
+        <SectionContainer title="All Sessions">
+          <div className="filter-options">
+            <button onClick={() => setFilter("ALL")}>ALL</button>
+            <button onClick={() => setFilter("TODAY")}>TODAY</button>
+            <button onClick={() => setFilter("UPCOMING")}>UPCOMING</button>
+            <button onClick={() => setFilter("COMPLETED")}>COMPLETED</button>
+          </div>
+          {filteredBookings.length === 0 ? (
+            <div className="no-data-notice">No traning sessions available</div>
+          ) : (
+            <Table headers={tableHeaders} body={tableBody} />
+          )}
+        </SectionContainer>
+      </div>
+    </>
+  );
 };
 
 export default CoachSession;

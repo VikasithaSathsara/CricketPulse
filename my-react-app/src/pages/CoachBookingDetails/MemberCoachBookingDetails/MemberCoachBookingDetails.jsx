@@ -77,7 +77,9 @@ const MemberCoachBookingDetails = () => {
       <SectionContainer title="Today's Sessions">
         <div className="today-sesstions">
           {todaySessions.length === 0 ? (
-            <p>No sessions for today.</p>
+                          <div className="no-data-notice">
+                          No traning sessions for today.
+                        </div>
           ) : (
             todaySessions.map((booking) => (
               <CoachBookingCard key={booking.id} coach_booking={booking} />

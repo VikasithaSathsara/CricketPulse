@@ -72,11 +72,13 @@ const MemberCourtBookingDetails = () => {
     }));
 
     return (
-        <div className="member-coach-booking-details">
+        <div className="member-court-booking-details">
             <SectionContainer title="Today's Court Bookings">
                 <div className="today-sesstions">
                     {todaySessions.length === 0 ? (
-                        <p>No court bookings for today.</p>
+                                      <div className="no-data-notice">
+                                      No traning sessions for today.
+                                    </div>
                     ) : (
                         todaySessions.map((booking) => (
                             <CourtBookingCard
