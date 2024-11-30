@@ -25,6 +25,8 @@ import BookingPage_coach from "./pages/BookingPages/BookingPage_coach";
 import BookingPage_court from "./pages/BookingPages/BookingPage_court";
 import MemberCoachBookingDetails from "./pages/CoachBookingDetails/MemberCoachBookingDetails/MemberCoachBookingDetails";
 import MemberCourtBookingDetails from "./pages/CourtBookingDetails/MemberCourtBookingDetails/MemberCourtBookingDetails";
+import PageNotFound from "./pages/PageNotFoundPage/PageNotFound";
+import Footer from "./components/Footer/Footer";
 
 function App() {
     const { isLoggedIn, role } = useContext(StoreContext);
@@ -42,8 +44,9 @@ function App() {
                         element={<PlayerRegister />}
                     />
                     <Route path="/about" element={<AboutPage />} />
+                    <Route path="*" element={<PageNotFound />} />
                 </Routes>
-                {/* <Footer /> */}
+                <Footer />
             </>
         );
     } else {
@@ -67,8 +70,9 @@ function App() {
                                 element={<AdminSession />}
                             />
                             <Route path="/users" element={<UserPage />} />
+                            <Route path="*" element={<PageNotFound />} />
                         </Routes>
-                        {/* <Footer /> */}
+                        <Footer />
                     </>
                 );
             case "COACH":
@@ -86,8 +90,9 @@ function App() {
                                 element={<CoachSession />}
                             />
                             <Route path="/profile" element={<Profile />} />
+                            <Route path="*" element={<PageNotFound />} />
                         </Routes>
-                        {/* <Footer /> */}
+                        <Footer />
                     </>
                 );
             case "MEMBER":
@@ -129,9 +134,10 @@ function App() {
                                 path="/member-court-booking-details"
                                 element={<MemberCourtBookingDetails />}
                             />
+                            <Route path="*" element={<PageNotFound />} />
                         </Routes>
 
-                        {/* <Footer /> */}
+                        <Footer />
                     </>
                 );
             default:
@@ -151,7 +157,7 @@ function App() {
                             />
                             <Route path="/about" element={<AboutPage />} />
                         </Routes>
-                        {/* <Footer /> */}
+                        <Footer />
                     </>
                 );
         }

@@ -87,7 +87,7 @@ const AdminDashBoard = () => {
             <SectionContainer title="Admin Dashboard">
                 <div className="card-container">
                     <div className="card">
-                        <h2>Total Players</h2>
+                        <h2>Total Members</h2>
                         <h2>100</h2>
                     </div>
                     <div className="card">
