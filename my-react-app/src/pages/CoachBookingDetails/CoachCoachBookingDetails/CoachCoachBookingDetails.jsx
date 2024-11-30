@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
-import "./CoachSessionStyles.scss";
+import "./CoachCoachBookingDetailsStyles.scss";
 import SectionContainer from "../../../components/SectionContainer/SectionContainer";
 import Table from "../../../components/Table/Table";
 import { StoreContext } from "../../../StoreContext/StoreContext";
 import axios from "axios";
 import CoachBookingCard from "../../../components/BookingCard/CoachBookingCard/CoachBookingCard";
 
-const CoachSession = () => {
+const CoachCoachBookingDetails = () => {
   const [bookings, setBookings] = useState([]);
   const [filter, setFilter] = useState("ALL");
   const { userId } = useContext(StoreContext);
@@ -104,4 +104,4 @@ const CoachSession = () => {
   );
 };
 
-export default CoachSession;
+export default CoachCoachBookingDetails;

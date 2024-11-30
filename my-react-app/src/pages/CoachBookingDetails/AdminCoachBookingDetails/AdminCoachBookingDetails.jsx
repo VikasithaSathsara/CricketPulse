@@ -4,9 +4,9 @@ import SectionContainer from "../../../components/SectionContainer/SectionContai
 import Table from "../../../components/Table/Table";
 import axios from "axios";
 import { StoreContext } from "../../../StoreContext/StoreContext";
-import "./AdminSessionStyles.scss";
+import "./AdminCoachBookingDetailsStyles.scss";
 
-const AdminSession = () => {
+const AdminCoachBookingDetails = () => {
   const [coachSessions, setcoachSessions] = useState([]);
   const [filter, setFilter] = useState("ALL");
   const { userId } = useContext(StoreContext);
@@ -23,16 +23,6 @@ useEffect(() => {
 
     fetchCoachSessions();
 }, []);
-
-const isToday = (date) => {
-    const today = new Date();
-    const sessionDate = new Date(date);
-    return (
-        sessionDate.getDate() === today.getDate() &&
-        sessionDate.getMonth() === today.getMonth() &&
-        sessionDate.getFullYear() === today.getFullYear()
-    );
-};
 
   const getStatus = (date) => {
     const today = new Date();
@@ -87,4 +77,4 @@ const isToday = (date) => {
   );
 };
 
-export default AdminSession;
+export default AdminCoachBookingDetails;

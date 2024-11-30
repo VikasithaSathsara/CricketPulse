@@ -201,17 +201,17 @@ const SideBar = () => {
                                         </li>
 
                                         <li className="side-item">
-                                            <Link to="/sessions">
+                                            <Link to="/admin-coach-bookings">
                                                 <PiCricketFill size={20} />
                                                 <span>Coach Bookings</span>
                                             </Link>
                                         </li>
-                                        {/* <li className="side-item">
+                                        <li className="side-item">
                                             <Link to="/admin-court-booking">
                                                 <FaAddressBook />
-                                                <span>Bookigs</span>
+                                                <span>Court Bookings</span>
                                             </Link>
-                                        </li> */}
+                                        </li>
                                         <li className="side-item">
                                             <Link to="/users">
                                                 <FaUsers />

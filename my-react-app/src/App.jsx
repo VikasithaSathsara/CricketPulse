@@ -12,13 +12,9 @@ import CoachDashboard from "./pages/DashBoard/CoachDashBoard/CoachDashboard";
 import { StoreContext } from "./StoreContext/StoreContext";
 import SideBar from "./components/SideBar/SideBar";
 import AboutPage from "./pages/AboutPage/AboutPage";
-import MemberDashboard from "./pages/DashBoard/MemberDashBoard/MemberDashboard";
-import MemberSession from "./pages/Sessions/MemberSessions/MemberSession";
-import CoachSession from "./pages/Sessions/CoachSessions/CoachSession";
-import AdminSession from "./pages/Sessions/AdminSessions/AdminSession";
 import Profile from "./pages/Profile/Profile";
 import CourtBooking from "./pages/CourtsBooking/MemberCourtBooking/CourtBooking";
-import AdminCourtBooking from "./pages/CourtsBooking/AdminCourtBooking/AdminCourtBooking";
+import AdminCourtBooking from "./pages/CourtBookingDetails/AdminCourtBookingDetails/AdminCourtBooking";
 import UserPage from "./pages/UserPage/UserPage";
 import CoachBooking from "./pages/CoachBooking/MemberCoachBooking/CoachBooking";
 import BookingPage_coach from "./pages/BookingPages/BookingPage_coach";
@@ -27,6 +23,8 @@ import MemberCoachBookingDetails from "./pages/CoachBookingDetails/MemberCoachBo
 import MemberCourtBookingDetails from "./pages/CourtBookingDetails/MemberCourtBookingDetails/MemberCourtBookingDetails";
 import PageNotFound from "./pages/PageNotFoundPage/PageNotFound";
 import Footer from "./components/Footer/Footer";
+import AdminCoachBookingDetails from "./pages/CoachBookingDetails/AdminCoachBookingDetails/AdminCoachBookingDetails";
+import CoachCoachBookingDetails from "./pages/CoachBookingDetails/CoachCoachBookingDetails/CoachCoachBookingDetails";
 
 function App() {
     const { isLoggedIn, role } = useContext(StoreContext);
@@ -66,8 +64,8 @@ function App() {
                                 element={<AdminCourtBooking />}
                             />
                             <Route
-                                path="/sessions"
-                                element={<AdminSession />}
+                                path="/admin-coach-bookings"
+                                element={<AdminCoachBookingDetails/>}
                             />
                             <Route path="/users" element={<UserPage />} />
                             <Route path="*" element={<PageNotFound />} />
@@ -87,7 +85,7 @@ function App() {
                             />
                             <Route
                                 path="/sessions"
-                                element={<CoachSession />}
+                                element={<CoachCoachBookingDetails />}
                             />
                             <Route path="/profile" element={<Profile />} />
                             <Route path="*" element={<PageNotFound />} />
@@ -104,10 +102,6 @@ function App() {
                             <Route
                                 path="/dashboard"
                                 element={<MemberDashBoard />}
-                            />
-                            <Route
-                                path="/sessions"
-                                element={<MemberSession />}
                             />
                             <Route path="/profile" element={<Profile />} />
                             <Route
