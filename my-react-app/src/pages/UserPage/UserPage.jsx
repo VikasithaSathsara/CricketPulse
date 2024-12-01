@@ -8,6 +8,7 @@ const UserPage = () => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [filter, setFilter] = useState("ALL");
+  const [showUpdateForm, setShowUpdateForm] = useState(false);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -35,7 +36,7 @@ const UserPage = () => {
   };
 
   const handleEditUser = (userId) => {
-    // Implement edit user functionality
+    
     console.log("Edit user:", userId);
   };
 
@@ -85,6 +86,7 @@ const UserPage = () => {
     "First Name",
     "Last Name",
     "Username",
+    "Phone Number",
     "Role",
     "Actions",
   ];
@@ -101,14 +103,74 @@ const UserPage = () => {
     firstName: user.firstName,
     lastName: user.lastName,
     Username: user.username,
+    phoneNumber: user.phoneNumber,
     role: user.role,
     actions: (
       <>
-        <button onClick={() => handleEditUser(user.userId)}>Edit</button>
+        <button onClick={() => handleShowUpdateForm(user.userId)}>Edit</button>
         <button onClick={() => handleDeleteUser(user.userId)}>Delete</button>
       </>
     ),
   }));
+
+  const [updatingUser, setupdatingUser] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    role: 'CUSTOMER',
+    password: ''
+  });
+
+  
+  const [currentUserId, setCurrentUserId] = useState(null);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setupdatingUser({ ...updatingUser, [name]: value });
+  };
+
+  const handleShowUpdateForm = (userId) => {
+    const userToEdit = users.find(user => user.userId === userId);
+    setupdatingUser({
+      userId: userToEdit.userId,
+      firstName: userToEdit.firstName,
+      lastName: userToEdit.lastName,
+      username: userToEdit.username, 
+      phoneNumber: userToEdit.phoneNumber,
+      role: userToEdit.role,
+      profilePic: userToEdit.profilePic,
+      password: userToEdit.password
+    });
+    setCurrentUserId(userId);
+    setShowUpdateForm(true);
+  };
+
+  const handleUpdateUser = async (user) => {
+    try {
+      await axios.put(`http://localhost:8080/api/users/update-user?id=${currentUserId}`, user);
+      const updatedUsers = users.map((u) => {
+        if (u.userId === currentUserId) {
+          return user;
+        }
+        return u;
+      });
+      setUsers(updatedUsers);
+      setFilteredUsers(updatedUsers);
+      setShowUpdateForm(false);
+      Swal.fire({
+        title: "Success!",
+        text: "User updated successfully.",
+        icon: "success",
+      });
+    } catch (error) {
+      console.error("Error updating user:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "Error updating user.",
+        icon: "error",
+      });
+    }
+  }
 
   return (
     <div className="admin-users-container">
@@ -118,6 +180,55 @@ const UserPage = () => {
         <button onClick={() => handleFilterChange("COACH")}>COACHES</button>
         <button onClick={() => handleFilterChange("MEMBER")}>MEMBERS</button>
       </div>
+
+
+      {showUpdateForm && (
+        <div className="user-form-popup">
+          <div className="user-form">
+            <h2>Update User</h2>
+            <input 
+              type="text" 
+              name="firstName" 
+              placeholder="First Name" 
+               value={updatingUser.firstName}
+              onChange={handleInputChange}
+            />
+            <input 
+              type="text" 
+              name="lastName" 
+              placeholder="Last Name" 
+              value={updatingUser.lastName}
+              onChange={handleInputChange}
+            />
+            <input 
+              type="email" 
+              name="username" 
+              placeholder="Username" 
+               value={updatingUser.username}
+              onChange={handleInputChange}
+            />
+              <input 
+              type="text" 
+              name="phoneNumber" 
+              placeholder="Phone Number" 
+              value={updatingUser.phoneNumber}
+              onChange={handleInputChange}
+            />
+            
+            <input 
+              type="password" 
+              name="password" 
+              placeholder="Password" 
+              value={updatingUser.password}
+              onChange={handleInputChange}
+            />
+            <div className="form-buttons">
+              <button onClick={()=>handleUpdateUser(updatingUser)}>Update</button>
+              <button onClick={() => setShowUpdateForm(false)}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {filteredUsers.length === 0 ? (
         <p>No user available.</p>
