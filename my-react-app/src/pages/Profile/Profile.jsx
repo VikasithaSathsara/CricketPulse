@@ -7,7 +7,7 @@ import { StoreContext } from "../../StoreContext/StoreContext";
 
 const Profile = () => {
     const { userId } = useContext(StoreContext);
-    const [isEditing, setIsEditing] = useState(false);
+    // const [isEditing, setIsEditing] = useState(false);
     const [userInfo, setuserInfo] = useState({
         firstName: "",
         lastName: "",
@@ -45,19 +45,19 @@ const Profile = () => {
         fetchUserData();
     }, []);
 
-    const handleEditToggle = () => {
-        setIsEditing(!isEditing);
-    };
+    // const handleEditToggle = () => {
+    //     setIsEditing(!isEditing);
+    // };
 
-    const handleInputChange = (e) => {
-        const { name, value } = e.target;
-        setuserInfo({ ...userInfo, [name]: value });
-    };
+    // const handleInputChange = (e) => {
+    //     const { name, value } = e.target;
+    //     setuserInfo({ ...userInfo, [name]: value });
+    // };
 
-    const handleProfileUpdate = () => {
-        console.log("Profile updated", userInfo);
-        setIsEditing(false);
-    };
+    // const handleProfileUpdate = () => {
+    //     console.log("Profile updated", userInfo);
+    //     setIsEditing(false);
+    // };
 
     return (
         <div className="profile-page">
@@ -69,7 +69,7 @@ const Profile = () => {
                                 src={userInfo.profilePic}
                                 alt="Profile"
                             />
-                            {isEditing && (
+                            {/* {isEditing && (
                                 <input
                                     type="file"
                                     name="profilePic"
@@ -82,7 +82,7 @@ const Profile = () => {
                                         })
                                     }
                                 />
-                            )}
+                            )} */}
 
                             <h1>
                                 {userInfo.firstName} {userInfo.lastName}
@@ -91,7 +91,7 @@ const Profile = () => {
                     </div>
                     <div className="right-container">
                         <div className="bio-section">
-                            {isEditing ? (
+                            {/* {isEditing ? (
                                 <>
                                     <input
                                         type="text"
@@ -153,7 +153,7 @@ const Profile = () => {
                                         Save
                                     </button>
                                 </>
-                            ) : (
+                            ) : ( */}
                                 <>
                                     <p>
                                         <label style={{ marginRight: "27px" }}>
@@ -207,11 +207,11 @@ const Profile = () => {
                                         : {userInfo.city}
                                     </p>
 
-                                    <button onClick={handleEditToggle}>
+                                    {/* <button onClick={handleEditToggle}>
                                         Edit
-                                    </button>
+                                    </button> */}
                                 </>
-                            )}
+                            {/* )} */}
                         </div>
                     </div>
                 </div>

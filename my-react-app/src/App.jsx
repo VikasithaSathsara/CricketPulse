@@ -114,7 +114,7 @@ function App() {
                             />
                             <Route
                                 path="/book-coach"
-                                element={<BookingPage_coach />}
+                                element={<BookingPage_coach/>}
                             />
                             <Route
                                 path="/book-court"

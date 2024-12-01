@@ -102,7 +102,7 @@ const BookingPage_court = () => {
                 console.log("Booking response:", response.data);
                 setShowPopup(false);
                 setTimeout(() => {
-                    window.location.replace("/dashboard");
+                    window.location.replace("/court-bookings");
                 }, 1000);
                 setSelectedSlot(null);
             } catch (error) {

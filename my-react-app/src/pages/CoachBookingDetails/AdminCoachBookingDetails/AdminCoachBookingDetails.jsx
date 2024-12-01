@@ -24,24 +24,34 @@ useEffect(() => {
     fetchCoachSessions();
 }, []);
 
-  const getStatus = (date) => {
-    const today = new Date();
-    const bookingDate = new Date(date);
+const getStatus = (date) => {
+  const today = new Date();
+  const bookingDate = new Date(date);
 
-    if (bookingDate >= today) {
-      if (
-        bookingDate.getDate() === today.getDate() &&
-        bookingDate.getMonth() === today.getMonth() &&
-        bookingDate.getFullYear() === today.getFullYear()
-      ) {
-        return "TODAY";
-      } else {
-        return "UPCOMING";
-      }
+  if (bookingDate < today) {
+    if (
+      bookingDate.getDate() === today.getDate() &&
+      bookingDate.getMonth() === today.getMonth() &&
+      bookingDate.getFullYear() === today.getFullYear()
+    ) {
+      return "TODAY";
     } else {
       return "COMPLETED";
     }
-  };
+  } else {
+    // return "UPCOMING";
+    if (
+      bookingDate.getDate() === today.getDate() &&
+      bookingDate.getMonth() === today.getMonth() &&
+      bookingDate.getFullYear() === today.getFullYear()
+    ) {
+      return "TODAY";
+    } else {
+      return "UPCOMING";
+    }
+  }
+};
+
   const filteredcoachSessions = coachSessions.filter((booking) => {
     const status = getStatus(booking.date);
     if (filter === "ALL") return true;
