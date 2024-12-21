@@ -19,6 +19,7 @@ const BookingPage_coach = () => {
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [menuOpen, setMenuOpen] = useState(true);
     const navigate = useNavigate();
+    const [filteredTags,setFilteredTags]=useState("")
     useEffect(() => {
         setSelectedSlot(null);
     }, []);
@@ -26,25 +27,44 @@ const BookingPage_coach = () => {
     const formatTimeSlot = (slot) => {
         return `${slot.start.time} - ${slot.end.time}`;
     };
-
-    const tags_ = timeSlots.map(formatTimeSlot);
-
-    const filteredTags = tags_.filter(
-        (item) =>
-            item
-                .toLocaleLowerCase()
-                .includes(query.toLocaleLowerCase().trim()) &&
-            item !== selectedSlot
-    );
-
     const getFirstDayOfCurrentMonth = () => {
         const now = new Date();
         return new Date();
     };
 
+
     const [selectedDate, setSelectedDate] = useState(
         getFirstDayOfCurrentMonth()
     );
+    useEffect(() => {
+        const fetchBookedSlots = async () => {
+            try {
+                const response = await axios.get(
+                    `http://localhost:8080/api/coach-bookings/get_coach_booking_slots_by_date?bookingDate=${selectedDate.toISOString().split("T")[0]}`
+                );
+                const bookedSlots = response.data;
+                const availableSlots = timeSlots
+                    .map(formatTimeSlot)
+                    .filter((slot) => !bookedSlots.includes(slot));
+                setFilteredTags(availableSlots);
+            } catch (error) {
+                console.error("Error fetching booked slots:", error);
+            }
+        };
+
+        fetchBookedSlots();
+    }, [selectedDate]);
+    const tags_ = timeSlots.map(formatTimeSlot);
+
+    // const filteredTags = tags_.filter(
+    //     (item) =>
+    //         item
+    //             .toLocaleLowerCase()
+    //             .includes(query.toLocaleLowerCase().trim()) &&
+    //         item !== selectedSlot
+    // );
+
+
 
     useEffect(() => {
         setSelectedSlot(null);
