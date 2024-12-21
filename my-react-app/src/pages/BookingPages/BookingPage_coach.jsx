@@ -40,7 +40,7 @@ const BookingPage_coach = () => {
         const fetchBookedSlots = async () => {
             try {
                 const response = await axios.get(
-                    `http://localhost:8080/api/coach-bookings/get_coach_booking_slots_by_date?bookingDate=${selectedDate.toISOString().split("T")[0]}`
+                    `http://localhost:8080/api/coach-bookings/get_coach_booking_slots_by_date_and_coachId?bookingDate=${selectedDate.toISOString().split("T")[0]}&coachId=${selectedCoach.id}`
                 );
                 const bookedSlots = response.data;
                 const availableSlots = timeSlots

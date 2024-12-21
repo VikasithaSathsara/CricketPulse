@@ -16,25 +16,11 @@ const BookingPage_court = () => {
     const [selectedSlot, setSelectedSlot] = useState(null);
     const [menuOpen, setMenuOpen] = useState(true);
     const navigate = useNavigate();
+    const [filteredTags,setFilteredTags]=useState("")
 
     useEffect(() => {
         setSelectedSlot(null);
     }, []);
-
-    const formatTimeSlot = (slot) => {
-        return `${slot.start.time} - ${slot.end.time}`;
-    };
-
-    const tags_ = timeSlots.map(formatTimeSlot);
-
-    const filteredTags = tags_.filter(
-        (item) =>
-            item
-                .toLocaleLowerCase()
-                .includes(query.toLocaleLowerCase().trim()) &&
-            item !== selectedSlot
-    );
-
     const getFirstDayOfCurrentMonth = () => {
         const now = new Date();
         return new Date();
@@ -43,6 +29,39 @@ const BookingPage_court = () => {
     const [selectedDate, setSelectedDate] = useState(
         getFirstDayOfCurrentMonth()
     );
+
+
+    const formatTimeSlot = (slot) => {
+        return `${slot.start.time} - ${slot.end.time}`;
+    };
+    useEffect(() => {
+        const fetchBookedSlots = async () => {
+            try {
+                const response = await axios.get(
+                    `http://localhost:8080/api/court-bookings/get_court_booking_slots_by_date_and_courtId?bookingDate=${selectedDate.toISOString().split("T")[0]}&courtId=${selectedCourt.courtId}`
+                );
+                const bookedSlots = response.data;
+                const availableSlots = timeSlots
+                    .map(formatTimeSlot)
+                    .filter((slot) => !bookedSlots.includes(slot));
+                setFilteredTags(availableSlots);
+            } catch (error) {
+                console.error("Error fetching booked slots:", error);
+            }
+        };
+
+        fetchBookedSlots();
+    }, [selectedDate]);
+    const tags_ = timeSlots.map(formatTimeSlot);
+
+    // const filteredTags = tags_.filter(
+    //     (item) =>
+    //         item
+    //             .toLocaleLowerCase()
+    //             .includes(query.toLocaleLowerCase().trim()) &&
+    //         item !== selectedSlot
+    // );
+
 
     useEffect(() => {
         setSelectedSlot(null);

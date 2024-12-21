@@ -7,6 +7,7 @@ import axios from "axios";
 import { StoreContext } from "../../../StoreContext/StoreContext";
 import CourtBooking from "../../CourtsBooking/MemberCourtBooking/CourtBooking";
 import CourtBookingCard from "../../../components/BookingCard/CourtBookingCard/CourtBookingCard";
+import Swal from "sweetalert2";
 
 const MemberCourtBookingDetails = () => {
   const [bookings, setBookings] = useState([]);
@@ -78,7 +79,34 @@ const MemberCourtBookingDetails = () => {
     "Date",
     "Time",
     "Status",
+    ""
   ];
+
+  const handleDelete = async (id) => {
+    try {
+      const confirmDelete = await Swal.fire({
+        title: 'Are You Sure Delete Booking?',
+        text: "Your Booking Charges Will Refund Within 2 Weeks.",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      });
+
+      if (confirmDelete.isConfirmed) {
+        await axios.delete(`http://localhost:8080/api/court-bookings?id=${id}`);
+        setBookings((prevBookings) => prevBookings.filter((booking) => booking.id !== id));
+        Swal.fire(
+          'Deleted!',
+          'Your session has been deleted.',
+          'success'
+        );
+      }
+    } catch (error) {
+      console.error("Error deleting coach session:", error);
+    }
+  };
   const tableBody = filteredBookings.map((booking) => ({
     id: `CB00${booking.id}`,
     court_id: booking.court.courtId,
@@ -86,7 +114,14 @@ const MemberCourtBookingDetails = () => {
     date: new Date(booking.date).toLocaleDateString(),
     time: `${booking.startTime} - ${booking.endTime}`,
     status: getStatus(booking.date),
+    delete: (
+      <button onClick={() => handleDelete(booking.id)} className="delete-button">
+        Delete
+      </button>
+    ),
   }));
+
+  
 
   return (
     <div className="member-court-booking-details">
